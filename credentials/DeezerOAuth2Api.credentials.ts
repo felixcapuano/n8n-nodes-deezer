@@ -1,4 +1,9 @@
-import type { ICredentialType, INodeProperties, IAuthenticateGeneric } from 'n8n-workflow';
+import type {
+	ICredentialType,
+	INodeProperties,
+	IAuthenticateGeneric,
+	// IDataObject,
+} from 'n8n-workflow';
 
 export class DeezerOAuth2Api implements ICredentialType {
 	name = 'deezerOAuth2Api';
@@ -13,52 +18,46 @@ export class DeezerOAuth2Api implements ICredentialType {
 		{
 			displayName: 'Deezer Server',
 			name: 'server',
-			type: 'hidden',
+			type: 'string',
 			default: 'https://api.deezer.com/',
 		},
 		{
 			displayName: 'Grant Type',
 			name: 'grantType',
-			type: 'hidden',
+			type: 'string',
 			default: 'authorizationCode',
 		},
 		{
 			displayName: 'Authorization URL',
 			name: 'authUrl',
-			type: 'hidden',
+			type: 'string',
 			default: 'https://connect.deezer.com/oauth/auth.php',
 			required: true,
 		},
 		{
 			displayName: 'Access Token URL',
 			name: 'accessTokenUrl',
-			type: 'hidden',
+			type: 'string',
 			default: 'https://connect.deezer.com/oauth/access_token.php',
 			required: true,
 		},
 		{
 			displayName: 'Scope',
 			name: 'scope',
-			type: 'hidden',
+			type: 'string',
 			default: 'basic_access,email',
 		},
 		{
 			displayName: 'Auth URI Query Parameters',
 			name: 'authQueryParameters',
-			type: 'hidden',
-			default: '',
+			type: 'string',
+			default: 'output=json',
 		},
 		{
 			displayName: 'Authentication',
 			name: 'authentication',
-			type: 'hidden',
-			default: 'qs',
-		},
-		{
-			displayName: 'Access Token',
-			name: 'access_token',
-			type: 'hidden',
-			default: 'fake_token',
+			type: 'string',
+			default: 'body',
 		},
 	];
 
@@ -67,7 +66,7 @@ export class DeezerOAuth2Api implements ICredentialType {
 		properties: {
 			qs: {
 				// Send this as part of the query string
-				access_token: '{{ $credentials.access_token }}',
+				access_token: '={{ $credentials.oauthTokenData["access_token"] }}',
 			},
 		},
 	};

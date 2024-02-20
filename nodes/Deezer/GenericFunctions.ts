@@ -30,7 +30,8 @@ export async function deezerApiRequest(
 			Accept: ' application/json',
 		},
 		qs: query,
-		url: uri || `https://api.deezer.com${endpoint}`,
+		url: uri || `https://mammoth.free.beeceptor.com${endpoint}`,
+		// url: uri || `https://api.deezer.com${endpoint}`,
 		json: true,
 	};
 
