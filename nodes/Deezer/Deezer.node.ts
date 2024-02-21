@@ -5,7 +5,6 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 	IHttpRequestMethods,
-	ICredentialDataDecryptedObject,
 } from 'n8n-workflow';
 
 import { deezerApiRequest, deezerApiRequestAllItems } from './GenericFunctions';
@@ -804,12 +803,6 @@ export class Deezer implements INodeType {
 		endpoint = '';
 		qs = {};
 		returnAll = false;
-
-		const credentials = (await this.getCredentials(
-			'deezerOAuth2Api',
-		)) as ICredentialDataDecryptedObject;
-		const token = (credentials.oauthTokenData as ICredentialDataDecryptedObject).access_token;
-		console.log(token);
 
 		for (let i = 0; i < items.length; i++) {
 			try {

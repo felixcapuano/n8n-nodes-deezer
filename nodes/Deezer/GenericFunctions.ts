@@ -5,6 +5,7 @@ import type {
 	JsonObject,
 	IHttpRequestOptions,
 	IHttpRequestMethods,
+	ICredentialDataDecryptedObject,
 } from 'n8n-workflow';
 import { NodeApiError } from 'n8n-workflow';
 
@@ -22,6 +23,10 @@ export async function deezerApiRequest(
 	query?: IDataObject,
 	uri?: string,
 ): Promise<any> {
+	const credentials = (await this.getCredentials(
+		'deezerOAuth2Api',
+	)) as ICredentialDataDecryptedObject;
+
 	const options: IHttpRequestOptions = {
 		method,
 		headers: {
@@ -29,9 +34,8 @@ export async function deezerApiRequest(
 			'Content-Type': 'text/plain',
 			Accept: ' application/json',
 		},
-		qs: query,
-		url: uri || `https://mammoth.free.beeceptor.com${endpoint}`,
-		// url: uri || `https://api.deezer.com${endpoint}`,
+		qs: { ...query, access_token: credentials.accessToken } as IDataObject,
+		url: uri || `https://api.deezer.com${endpoint}`,
 		json: true,
 	};
 
