@@ -1,3 +1,5 @@
+import type { ClientOAuth2Options, ClientOAuth2TokenData } from '@n8n/client-oauth2';
+import { ClientOAuth2 } from '@n8n/client-oauth2';
 import type {
 	IDataObject,
 	IExecuteFunctions,
@@ -23,27 +25,42 @@ export async function deezerApiRequest(
 	query?: IDataObject,
 	uri?: string,
 ): Promise<any> {
-	const credentials = (await this.getCredentials(
-		'deezerOAuth2Api',
-	)) as ICredentialDataDecryptedObject;
-
-	const options: IHttpRequestOptions = {
+	const requestOptions: IHttpRequestOptions = {
 		method,
 		headers: {
 			'User-Agent': 'n8n',
 			'Content-Type': 'text/plain',
 			Accept: ' application/json',
 		},
-		qs: { ...query, access_token: credentials.accessToken } as IDataObject,
-		url: uri || `https://api.deezer.com${endpoint}`,
+		qs: query,
+		// url: uri || `https://api.deezer.com${endpoint}`,
+		url: uri || `https://mammoth.free.beeceptor.com${endpoint}`,
 		json: true,
 	};
 
 	if (Object.keys(body).length > 0) {
-		options.body = body;
+		requestOptions.body = body;
 	}
 	try {
-		return await this.helpers.requestOAuth2.call(this, 'deezerOAuth2Api', options);
+		const credentials = (await this.getCredentials(
+			'deezerOAuth2Api',
+		)) as ICredentialDataDecryptedObject;
+
+		const oAuthClient = new ClientOAuth2({
+			clientId: credentials.clientId,
+			clientSecret: credentials.clientSecret,
+			accessTokenUri: credentials.accessTokenUrl,
+			scopes: (credentials.scope as string).split(' '),
+			ignoreSSLIssues: credentials.ignoreSSLIssues,
+			authentication: credentials.authentication ?? 'header',
+		} as ClientOAuth2Options);
+
+		const oauthTokenData = credentials.oauthTokenData as ClientOAuth2TokenData;
+		const token = oAuthClient.createToken(oauthTokenData);
+
+		requestOptions.qs = { ...requestOptions.qs, access_token: token.accessToken };
+
+		return await this.helpers.httpRequest(requestOptions);
 	} catch (error) {
 		throw new NodeApiError(this.getNode(), error as JsonObject);
 	}
