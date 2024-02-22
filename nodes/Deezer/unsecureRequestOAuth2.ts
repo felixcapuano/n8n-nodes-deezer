@@ -258,3 +258,64 @@ export async function unsecureRequestOAuth2(
 			throw error;
 		});
 }
+
+
+export async function simplifiedRequestOAuth2(
+	this: IAllExecuteFunctions,
+	credentialsType: string,
+	requestOptions: IHttpRequestOptions | IRequestOptions,
+  ) {
+	const credentials = await this.getCredentials(credentialsType) as OAuth2CredentialData;
+  
+	const oAuthClient = new ClientOAuth2({
+	  clientId: credentials.clientId,
+	  clientSecret: credentials.clientSecret,
+	  accessTokenUri: credentials.accessTokenUrl,
+	  scopes: (credentials.scope as string).split(' '),
+	  ignoreSSLIssues: credentials.ignoreSSLIssues,
+	  authentication: credentials.authentication ?? 'header',
+	});
+  
+	const oauthTokenData = credentials.oauthTokenData as ClientOAuth2TokenData;
+	const token = oAuthClient.createToken({
+	  ...oauthTokenData,
+	  accessToken: oauthTokenData?.accessToken,
+	  refreshToken: oauthTokenData?.refreshToken,
+	});
+  
+	const newRequestOptions = token.sign(requestOptions as ClientOAuth2RequestObject);
+  
+	return await this.helpers.httpRequest(newRequestOptions);
+  }
+
+  export async function simplifiedUnsecureRequestOAuth2(
+	this: IAllExecuteFunctions,
+	credentialsType: string,
+	requestOptions: IHttpRequestOptions | IRequestOptions,
+  ) {
+	const credentials = await this.getCredentials(credentialsType) as OAuth2CredentialData;
+  
+	const oAuthClient = new ClientOAuth2({
+	  clientId: credentials.clientId,
+	  clientSecret: credentials.clientSecret,
+	  accessTokenUri: credentials.accessTokenUrl,
+	  scopes: (credentials.scope as string).split(' '),
+	  ignoreSSLIssues: credentials.ignoreSSLIssues,
+	  authentication: credentials.authentication ?? 'header',
+	});
+  
+	const oauthTokenData = credentials.oauthTokenData as ClientOAuth2TokenData;
+	const token = oAuthClient.createToken({
+	  ...oauthTokenData,
+	  accessToken: oauthTokenData?.accessToken,
+	  refreshToken: oauthTokenData?.refreshToken,
+	});
+  
+	const newRequestOptions = token.sign(requestOptions as ClientOAuth2RequestObject);
+	const queryParameters = new URLSearchParams(newRequestOptions.query);
+	queryParameters.set('access_token', token.accessToken);
+	newRequestOptions.query = queryParameters.toString();
+  
+	return await this.helpers.httpRequest(newRequestOptions);
+  }
+  
