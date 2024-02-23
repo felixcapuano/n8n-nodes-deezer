@@ -91,55 +91,55 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
-						name: 'Add Song to Queue',
+						name: 'Add Song to Queue TODO',
 						value: 'addSongToQueue',
 						description: 'Add a song to your queue',
 						action: 'Add a song to a queue',
 					},
 					{
-						name: 'Currently Playing',
+						name: 'Currently Playing TODO',
 						value: 'currentlyPlaying',
 						description: 'Get your currently playing track',
 						action: 'Get the currently playing track',
 					},
 					{
-						name: 'Next Song',
+						name: 'Next Song TODO',
 						value: 'nextSong',
 						description: 'Skip to your next track',
 						action: 'Skip to the next track',
 					},
 					{
-						name: 'Pause',
+						name: 'Pause TODO',
 						value: 'pause',
 						description: 'Pause your music',
 						action: 'Pause the player',
 					},
 					{
-						name: 'Previous Song',
+						name: 'Previous Song TODO',
 						value: 'previousSong',
 						description: 'Skip to your previous song',
 						action: 'Skip to the previous song',
 					},
 					{
-						name: 'Recently Played',
+						name: 'Recently Played TODO',
 						value: 'recentlyPlayed',
 						description: 'Get your recently played tracks',
 						action: 'Get the recently played tracks',
 					},
 					{
-						name: 'Resume',
+						name: 'Resume TODO',
 						value: 'resume',
 						description: 'Resume playback on the current active device',
 						action: 'Resume the player',
 					},
 					{
-						name: 'Set Volume',
+						name: 'Set Volume TODO',
 						value: 'volume',
 						description: 'Set volume on the current active device',
 						action: 'Set volume on the player',
 					},
 					{
-						name: 'Start Music',
+						name: 'Start Music TODO',
 						value: 'startMusic',
 						description: 'Start playing a playlist, artist, or album',
 						action: 'Start music on the player',
@@ -159,8 +159,8 @@ export class Deezer implements INodeType {
 						operation: ['startMusic'],
 					},
 				},
-				placeholder: 'deezer:album:1YZ3k65Mqw3G8FzYlW1mmp',
-				description: 'Enter a playlist, artist, or album URI or ID',
+				placeholder: '1234567',
+				description: 'Enter a playlist, artist, or album ID',
 			},
 			{
 				displayName: 'Track ID',
@@ -174,8 +174,8 @@ export class Deezer implements INodeType {
 						operation: ['addSongToQueue'],
 					},
 				},
-				placeholder: 'deezer:track:0xE4LEFzSNGsz1F6kvXsHU',
-				description: 'Enter a track URI or ID',
+				placeholder: '1234567',
+				description: 'Enter a track ID',
 			},
 
 			// -----------------------------------------------
@@ -196,23 +196,23 @@ export class Deezer implements INodeType {
 					{
 						name: 'Get',
 						value: 'get',
-						description: 'Get an album by URI or ID',
+						description: 'Get an album by ID',
 						action: 'Get an album',
-					},
-					{
-						name: 'Get New Releases',
-						value: 'getNewReleases',
-						description: 'Get a list of new album releases',
-						action: 'Get new album releases',
 					},
 					{
 						name: 'Get Tracks',
 						value: 'getTracks',
-						description: "Get an album's tracks by URI or ID",
-						action: "Get an album's tracks by URI or ID",
+						description: "Get an album's tracks by ID",
+						action: "Get an album's tracks by ID",
 					},
 					{
-						name: 'Search',
+						name: 'Get Fans TODO',
+						value: 'getFans',
+						description: "Get a list of album's fans. Represented by an array of User objects",
+						action: "Get a list of album's fans",
+					},
+					{
+						name: 'Search TODO',
 						value: 'search',
 						description: 'Search albums by keyword',
 						action: 'Search albums by keyword',
@@ -235,8 +235,8 @@ export class Deezer implements INodeType {
 						operation: ['search'],
 					},
 				},
-				placeholder: 'deezer:album:1YZ3k65Mqw3G8FzYlW1mmp',
-				description: "The album's Deezer URI or ID",
+				placeholder: '1234567',
+				description: "The album's Deezer ID",
 			},
 			{
 				displayName: 'Search Keyword',
@@ -271,29 +271,47 @@ export class Deezer implements INodeType {
 					{
 						name: 'Get',
 						value: 'get',
-						description: 'Get an artist by URI or ID',
+						description: 'Get an artist by ID',
 						action: 'Get an artist',
 					},
 					{
-						name: 'Get Albums',
+						name: 'Get Albums TODO',
 						value: 'getAlbums',
-						description: "Get an artist's albums by URI or ID",
-						action: "Get an artist's albums by URI or ID",
+						description: "Get an artist's albums by ID",
+						action: "Get an artist's albums by ID",
 					},
 					{
-						name: 'Get Related Artists',
+						name: 'Get Related Artists TODO',
 						value: 'getRelatedArtists',
-						description: "Get an artist's related artists by URI or ID",
-						action: "Get an artist's related artists by URI or ID",
+						description: "Get an artist's related artists by ID",
+						action: "Get an artist's related artists by ID",
 					},
 					{
-						name: 'Get Top Tracks',
+						name: 'Get Top Tracks TODO',
 						value: 'getTopTracks',
-						description: "Get an artist's top tracks by URI or ID",
-						action: "Get an artist's top tracks by URI or ID",
+						description: "Get an artist's top tracks by ID",
+						action: "Get an artist's top tracks by ID",
 					},
 					{
-						name: 'Search',
+						name: 'Get Playlist TODO',
+						value: 'getPlaylists',
+						description: 'Get artist playlists by ID',
+						action: 'Get artist playlists by ID',
+					},
+					{
+						name: 'Get Fans TODO',
+						value: 'getFans',
+						description: 'Get artist fans by ID',
+						action: 'Get artist fans by ID',
+					},
+					{
+						name: 'Get Radios TODO',
+						value: 'getRadios',
+						description: 'Get artist radios by ID',
+						action: 'Get artist radios by ID',
+					},
+					{
+						name: 'Search TODO',
 						value: 'search',
 						description: 'Search artists by keyword',
 						action: 'Search artists by keyword',
@@ -315,8 +333,8 @@ export class Deezer implements INodeType {
 						operation: ['search'],
 					},
 				},
-				placeholder: 'deezer:artist:4LLpKhyESsyAXpc4laK94U',
-				description: "The artist's Deezer URI or ID",
+				placeholder: '1234567',
+				description: "The artist's Deezer ID",
 			},
 			{
 				displayName: 'Country',
@@ -366,43 +384,43 @@ export class Deezer implements INodeType {
 
 				options: [
 					{
-						name: 'Add an Item',
+						name: 'Add an Item TODO',
 						value: 'add',
-						description: 'Add tracks to a playlist by track and playlist URI or ID',
+						description: 'Add tracks to a playlist by track and playlist ID',
 						action: 'Add an Item to a playlist',
 					},
 					{
-						name: 'Create a Playlist',
+						name: 'Create a Playlist TODO',
 						value: 'create',
 						description: 'Create a new playlist',
 						action: 'Create a playlist',
 					},
 					{
-						name: 'Get',
+						name: 'Get TODO',
 						value: 'get',
-						description: 'Get a playlist by URI or ID',
+						description: 'Get a playlist by ID',
 						action: 'Get a playlist',
 					},
 					{
-						name: "Get the User's Playlists",
+						name: "Get the User's Playlists TODO",
 						value: 'getUserPlaylists',
 						description: "Get a user's playlists",
 						action: "Get a user's playlists",
 					},
 					{
-						name: 'Get Tracks',
+						name: 'Get Tracks TODO',
 						value: 'getTracks',
-						description: "Get a playlist's tracks by URI or ID",
-						action: "Get a playlist's tracks by URI or ID",
+						description: "Get a playlist's tracks by ID",
+						action: "Get a playlist's tracks by ID",
 					},
 					{
-						name: 'Remove an Item',
+						name: 'Remove an Item TODO',
 						value: 'delete',
-						description: 'Remove tracks from a playlist by track and playlist URI or ID',
+						description: 'Remove tracks from a playlist by track and playlist ID',
 						action: 'Remove an item from a playlist',
 					},
 					{
-						name: 'Search',
+						name: 'Search TODO',
 						value: 'search',
 						description: 'Search playlists by keyword',
 						action: 'Search playlists by keyword',
@@ -423,7 +441,7 @@ export class Deezer implements INodeType {
 					},
 				},
 				placeholder: 'deezer:playlist:37i9dQZF1DWUhI3iC1khPH',
-				description: "The playlist's Deezer URI or its ID",
+				description: "The playlist's Deezer ID",
 			},
 			{
 				displayName: 'Name',
@@ -482,8 +500,8 @@ export class Deezer implements INodeType {
 						operation: ['add', 'delete'],
 					},
 				},
-				placeholder: 'deezer:track:0xE4LEFzSNGsz1F6kvXsHU',
-				description: "The track's Deezer URI or its ID. The track to add/delete from the playlist.",
+				placeholder: '1234567',
+				description: "The track's Deezer ID. The track to add/delete from the playlist.",
 			},
 			{
 				displayName: 'Additional Fields',
@@ -542,19 +560,19 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get',
+						name: 'Get TODO',
 						value: 'get',
-						description: 'Get a track by its URI or ID',
+						description: 'Get a track by its ID',
 						action: 'Get a track',
 					},
 					{
-						name: 'Get Audio Features',
+						name: 'Get Audio Features TODO',
 						value: 'getAudioFeatures',
-						description: 'Get audio features for a track by URI or ID',
+						description: 'Get audio features for a track by ID',
 						action: 'Get audio features of a track',
 					},
 					{
-						name: 'Search',
+						name: 'Search TODO',
 						value: 'search',
 						description: 'Search tracks by keyword',
 						action: 'Search tracks by keyword',
@@ -576,8 +594,8 @@ export class Deezer implements INodeType {
 						operation: ['search'],
 					},
 				},
-				placeholder: 'deezer:track:0xE4LEFzSNGsz1F6kvXsHU',
-				description: "The track's Deezer URI or ID",
+				placeholder: '1234567',
+				description: "The track's Deezer ID",
 			},
 			{
 				displayName: 'Search Keyword',
@@ -610,7 +628,7 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get Liked Tracks',
+						name: 'Get Liked Tracks TODO',
 						value: 'getLikedTracks',
 						description: "Get the user's liked tracks",
 						action: 'Get liked tracks',
@@ -635,7 +653,7 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get Following Artists',
+						name: 'Get Following Artists TODO',
 						value: 'getFollowingArtists',
 						description: 'Get your followed artists',
 						action: 'Get your followed artists',
@@ -916,13 +934,11 @@ export class Deezer implements INodeType {
 					// -----------------------------
 
 					if (operation === 'get') {
-						const uri = this.getNodeParameter('id', i) as string;
-
-						const id = uri.replace('deezer:album:', '');
+						const id = this.getNodeParameter('id', i) as string;
 
 						requestMethod = 'GET';
 
-						endpoint = `/albums/${id}`;
+						endpoint = `/album/${id}`;
 
 						responseData = await deezerApiRequest.call(this, requestMethod, endpoint, body, qs);
 					} else if (operation === 'getNewReleases') {
@@ -944,13 +960,11 @@ export class Deezer implements INodeType {
 							responseData = responseData.albums.items;
 						}
 					} else if (operation === 'getTracks') {
-						const uri = this.getNodeParameter('id', i) as string;
-
-						const id = uri.replace('deezer:album:', '');
+						const id = this.getNodeParameter('id', i) as string;
 
 						requestMethod = 'GET';
 
-						endpoint = `/albums/${id}/tracks`;
+						endpoint = `/album/${id}/tracks`;
 
 						propertyName = 'tracks';
 
@@ -967,7 +981,7 @@ export class Deezer implements INodeType {
 
 							responseData = await deezerApiRequest.call(this, requestMethod, endpoint, body, qs);
 
-							responseData = responseData.items;
+							responseData = responseData.data;
 						}
 					} else if (operation === 'search') {
 						requestMethod = 'GET';
@@ -998,9 +1012,7 @@ export class Deezer implements INodeType {
 					//      Artist Operations
 					// -----------------------------
 
-					const uri = this.getNodeParameter('id', i, '') as string;
-
-					const id = uri.replace('deezer:artist:', '');
+					const id = this.getNodeParameter('id', i, '') as string;
 
 					if (operation === 'getAlbums') {
 						endpoint = `/artists/${id}/albums`;
@@ -1032,8 +1044,7 @@ export class Deezer implements INodeType {
 						qs = {
 							country,
 						};
-
-						endpoint = `/artists/${id}/top-tracks`;
+						endpoint = `/artist/${id}/top`;
 
 						responseData = await deezerApiRequest.call(this, requestMethod, endpoint, body, qs);
 
@@ -1041,7 +1052,7 @@ export class Deezer implements INodeType {
 					} else if (operation === 'get') {
 						requestMethod = 'GET';
 
-						endpoint = `/artists/${id}`;
+						endpoint = `/artist/${id}`;
 
 						responseData = await deezerApiRequest.call(this, requestMethod, endpoint, body, qs);
 					} else if (operation === 'search') {
@@ -1101,7 +1112,7 @@ export class Deezer implements INodeType {
 						} else if (operation === 'getTracks') {
 							requestMethod = 'GET';
 
-							endpoint = `/playlists/${id}/tracks`;
+							endpoint = `/playlist/${id}/tracks`;
 
 							returnAll = this.getNodeParameter('returnAll', i);
 
@@ -1116,7 +1127,7 @@ export class Deezer implements INodeType {
 
 								responseData = await deezerApiRequest.call(this, requestMethod, endpoint, body, qs);
 
-								responseData = responseData.items;
+								responseData = responseData.data;
 							}
 						} else if (operation === 'add') {
 							requestMethod = 'POST';
@@ -1198,9 +1209,7 @@ export class Deezer implements INodeType {
 					//      Track Operations
 					// -----------------------------
 
-					const uri = this.getNodeParameter('id', i, '') as string;
-
-					const id = uri.replace('deezer:track:', '');
+					const id = this.getNodeParameter('id', i, '') as string;
 
 					requestMethod = 'GET';
 
