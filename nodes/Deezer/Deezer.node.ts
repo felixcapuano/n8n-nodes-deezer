@@ -69,7 +69,6 @@ export class Deezer implements INodeType {
 		properties: [
 			// ----------------------------------------------------------------
 			//         Resource to Operate on
-			//         Album, Artist, Library, My Data, Player, Playlist, Track
 			// ----------------------------------------------------------------
 			{
 				displayName: 'Resource',
@@ -80,123 +79,16 @@ export class Deezer implements INodeType {
 					{ name: 'Album', value: 'album' },
 					{ name: 'Artist', value: 'artist' },
 					{ name: 'Playlist', value: 'playlist' },
-					// { name: 'Track', value: 'track' },
-					// { name: 'Chart', value: 'chart' },
-
-					// { name: 'Library', value: 'library' },
-					// { name: 'My Data', value: 'myData' },
-					// { name: 'Player', value: 'player' },
+					{ name: 'Track', value: 'track' },
+					{ name: 'Chart', value: 'chart' },
+					{ name: 'User', value: 'user' },
+					{ name: 'Podcast', value: 'podcast' },
 				],
 				default: 'player',
 			},
 
-			// --------------------------------------------------------------------------------------------------------
-			//         Player Operations
-			//         Pause, Play, Resume, Get Recently Played, Get Currently Playing, Next Song, Previous Song,
-			//         Add to Queue, Set Volume
-			// --------------------------------------------------------------------------------------------------------
-			// {
-			// 	displayName: 'Operation',
-			// 	name: 'operation',
-			// 	type: 'options',
-			// 	noDataExpression: true,
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['player'],
-			// 		},
-			// 	},
-			// 	options: [
-			// 		{
-			// 			name: 'Add Song to Queue TODO',
-			// 			value: 'addSongToQueue',
-			// 			description: 'Add a song to your queue',
-			// 			action: 'Add a song to a queue',
-			// 		},
-			// 		{
-			// 			name: 'Currently Playing TODO',
-			// 			value: 'currentlyPlaying',
-			// 			description: 'Get your currently playing track',
-			// 			action: 'Get the currently playing track',
-			// 		},
-			// 		{
-			// 			name: 'Next Song TODO',
-			// 			value: 'nextSong',
-			// 			description: 'Skip to your next track',
-			// 			action: 'Skip to the next track',
-			// 		},
-			// 		{
-			// 			name: 'Pause TODO',
-			// 			value: 'pause',
-			// 			description: 'Pause your music',
-			// 			action: 'Pause the player',
-			// 		},
-			// 		{
-			// 			name: 'Previous Song TODO',
-			// 			value: 'previousSong',
-			// 			description: 'Skip to your previous song',
-			// 			action: 'Skip to the previous song',
-			// 		},
-			// 		{
-			// 			name: 'Recently Played TODO',
-			// 			value: 'recentlyPlayed',
-			// 			description: 'Get your recently played tracks',
-			// 			action: 'Get the recently played tracks',
-			// 		},
-			// 		{
-			// 			name: 'Resume TODO',
-			// 			value: 'resume',
-			// 			description: 'Resume playback on the current active device',
-			// 			action: 'Resume the player',
-			// 		},
-			// 		{
-			// 			name: 'Set Volume TODO',
-			// 			value: 'volume',
-			// 			description: 'Set volume on the current active device',
-			// 			action: 'Set volume on the player',
-			// 		},
-			// 		{
-			// 			name: 'Start Music TODO',
-			// 			value: 'startMusic',
-			// 			description: 'Start playing a playlist, artist, or album',
-			// 			action: 'Start music on the player',
-			// 		},
-			// 	],
-			// 	default: 'addSongToQueue',
-			// },
-			// {
-			// 	displayName: 'Resource ID',
-			// 	name: 'id',
-			// 	type: 'string',
-			// 	default: '',
-			// 	required: true,
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['player'],
-			// 			operation: ['startMusic'],
-			// 		},
-			// 	},
-			// 	placeholder: '1234567',
-			// 	description: 'Enter a playlist, artist, or album ID',
-			// },
-			// {
-			// 	displayName: 'Track ID',
-			// 	name: 'id',
-			// 	type: 'string',
-			// 	default: '',
-			// 	required: true,
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['player'],
-			// 			operation: ['addSongToQueue'],
-			// 		},
-			// 	},
-			// 	placeholder: '1234567',
-			// 	description: 'Enter a track ID',
-			// },
-
 			// -----------------------------------------------
 			//         Album Operations
-			//         Get an Album, Get an Album's Tracks
 			// -----------------------------------------------
 			{
 				displayName: 'Operation',
@@ -236,43 +128,9 @@ export class Deezer implements INodeType {
 				],
 				default: 'get',
 			},
-			{
-				displayName: 'Album ID',
-				name: 'id',
-				type: 'string',
-				default: '',
-				required: true,
-				displayOptions: {
-					show: {
-						resource: ['album'],
-						operation: ['get', 'getTracks'],
-					},
-					hide: {
-						operation: ['search'],
-					},
-				},
-				placeholder: '1234567',
-				description: "The album's Deezer ID",
-			},
-			{
-				displayName: 'Search Keyword',
-				name: 'query',
-				type: 'string',
-				required: true,
-				default: '',
-				description: 'The keyword term to search for',
-				displayOptions: {
-					show: {
-						resource: ['album'],
-						operation: ['search'],
-					},
-				},
-			},
-
-			// -------------------------------------------------------------------------------------------------------------
+			// ----------------------------------------------------------------
 			//         Artist Operations
-			//         Get an Artist, Get an Artist's Related Artists, Get an Artist's Top Tracks, Get an Artist's Albums
-			// -------------------------------------------------------------------------------------------------------------
+			// ----------------------------------------------------------------
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -291,43 +149,43 @@ export class Deezer implements INodeType {
 						action: 'Get an artist',
 					},
 					{
-						name: 'Get Albums TODO',
+						name: 'Get Albums',
 						value: 'getAlbums',
 						description: "Get an artist's albums by ID",
 						action: "Get an artist's albums by ID",
 					},
 					{
-						name: 'Get Related Artists TODO',
+						name: 'Get Related Artists',
 						value: 'getRelatedArtists',
 						description: "Get an artist's related artists by ID",
 						action: "Get an artist's related artists by ID",
 					},
 					{
-						name: 'Get Top Tracks TODO',
+						name: 'Get Top Tracks',
 						value: 'getTopTracks',
 						description: "Get an artist's top tracks by ID",
 						action: "Get an artist's top tracks by ID",
 					},
 					{
-						name: 'Get Playlist TODO',
+						name: 'Get Playlist',
 						value: 'getPlaylists',
 						description: 'Get artist playlists by ID',
 						action: 'Get artist playlists by ID',
 					},
 					{
-						name: 'Get Fans TODO',
+						name: 'Get Fans',
 						value: 'getFans',
 						description: 'Get artist fans by ID',
 						action: 'Get artist fans by ID',
 					},
 					{
-						name: 'Get Radio TODO',
+						name: 'Get Radio',
 						value: 'getRadio',
 						description: 'Get artist radio by ID',
 						action: 'Get artist radio by ID',
 					},
 					{
-						name: 'Search TODO',
+						name: 'Search',
 						value: 'search',
 						description: 'Search artists by keyword',
 						action: 'Search artists by keyword',
@@ -335,57 +193,9 @@ export class Deezer implements INodeType {
 				],
 				default: 'get',
 			},
-			{
-				displayName: 'Artist ID',
-				name: 'id',
-				type: 'string',
-				default: '',
-				required: true,
-				displayOptions: {
-					show: {
-						resource: ['artist'],
-					},
-					hide: {
-						operation: ['search'],
-					},
-				},
-				placeholder: '1234567',
-				description: "The artist's Deezer ID",
-			},
-			{
-				displayName: 'Country',
-				name: 'country',
-				type: 'string',
-				default: 'US',
-				required: true,
-				displayOptions: {
-					show: {
-						resource: ['artist'],
-						operation: ['getTopTracks'],
-					},
-				},
-				placeholder: 'US',
-				description: 'Top tracks in which country? Enter the postal abbreviation',
-			},
-			{
-				displayName: 'Search Keyword',
-				name: 'query',
-				type: 'string',
-				required: true,
-				default: '',
-				description: 'The keyword term to search for',
-				displayOptions: {
-					show: {
-						resource: ['artist'],
-						operation: ['search'],
-					},
-				},
-			},
-
-			// -------------------------------------------------------------------------------------------------------------
+			// -----------------------------------------------------
 			//         Playlist Operations
-			//         Get a Playlist, Get a Playlist's Tracks, Add/Remove a Song from a Playlist, Get a User's Playlists
-			// -------------------------------------------------------------------------------------------------------------
+			// -----------------------------------------------------
 			{
 				displayName: 'Operation',
 				name: 'operation',
@@ -396,7 +206,6 @@ export class Deezer implements INodeType {
 						resource: ['playlist'],
 					},
 				},
-
 				options: [
 					{
 						name: 'Get',
@@ -405,16 +214,22 @@ export class Deezer implements INodeType {
 						action: 'Get a playlist',
 					},
 					{
-						name: "Get the User's Playlists",
-						value: 'getUserPlaylists',
-						description: "Get a user's playlists",
-						action: "Get a user's playlists",
-					},
-					{
 						name: 'Create a Playlist',
 						value: 'create',
 						description: 'Create a new playlist',
 						action: 'Create a playlist',
+					},
+					{
+						name: 'Delete a Playlist',
+						value: 'delete',
+						description: 'Delete a playlist',
+						action: 'Delete a playlist',
+					},
+					{
+						name: 'Get Fans',
+						value: 'getFans',
+						description: 'Get artist fans by ID',
+						action: 'Get artist fans by ID',
 					},
 					{
 						name: 'Get Tracks',
@@ -435,29 +250,255 @@ export class Deezer implements INodeType {
 						action: 'Remove an item from a playlist',
 					},
 					{
+						name: 'Get Radio',
+						value: 'getRadio',
+						description: "Return a list of playlist's recommendation tracks.",
+						action: "Return a list of playlist's recommendation tracks.",
+					},
+					{
 						name: 'Search',
 						value: 'search',
 						description: 'Search playlists by keyword',
 						action: 'Search playlists by keyword',
 					},
 				],
-				default: 'add',
+				default: 'get',
 			},
+			// -----------------------------------------------------
+			//         Track Operations
+			// -----------------------------------------------------
 			{
-				displayName: 'Playlist ID',
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['track'],
+					},
+				},
+				options: [
+					{
+						name: 'Get',
+						value: 'get',
+						description: 'Get a track by its ID',
+						action: 'Get a track',
+					},
+					{
+						name: 'Search',
+						value: 'search',
+						description: 'Search tracks by keyword',
+						action: 'Search tracks by keyword',
+					},
+				],
+				default: 'get',
+			},
+			// ---------------------------------------
+			//         Chart Operations
+			// ---------------------------------------
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['chart'],
+					},
+				},
+				options: [
+					{
+						name: 'Get All',
+						value: 'get',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Artists',
+						value: 'getArtists',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Albums',
+						value: 'getAlbums',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Tracks',
+						value: 'getTracks',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Playlists',
+						value: 'getPlaylists',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Podcasts',
+						value: 'getPodcasts',
+						description: '',
+						action: '',
+					},
+				],
+				default: 'get',
+			},
+			// ---------------------------------------
+			//         User Operations
+			// ---------------------------------------
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['user'],
+					},
+				},
+				options: [
+					{
+						name: 'Get User',
+						value: 'get',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Playlists',
+						value: 'getPlaylists',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Favorite Tracks',
+						value: 'getFavoriteTracks',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Favorite Albums',
+						value: 'getFavoriteAlbums',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Favorite Artists',
+						value: 'getFavoriteArtists',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Favorite Podcasts',
+						value: 'getFavoritePodcasts',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Favorite Radios',
+						value: 'getFavoriteRadios',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Flow',
+						value: 'getFlow',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Followings',
+						value: 'getFollowings',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Followers',
+						value: 'getFollowers',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Recent Tracks',
+						value: 'getRecentTracks',
+						description: '',
+						action: '',
+					},
+				],
+				default: 'get',
+			},
+			// ---------------------------------------
+			//         Podcast Operations
+			// ---------------------------------------
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['podcast'],
+					},
+				},
+				options: [
+					{
+						name: 'Get',
+						value: 'get',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Episodes',
+						value: 'getEpisodes',
+						description: '',
+						action: '',
+					},
+					{
+						name: 'Search',
+						value: 'search',
+						description: '',
+						action: '',
+					},
+				],
+				default: 'get',
+			},
+			// -----------------------------------------------------
+			//         Commons
+			// -----------------------------------------------------
+			{
+				displayName: 'Resource ID',
 				name: 'id',
 				type: 'string',
 				default: '',
 				required: true,
 				displayOptions: {
 					show: {
-						resource: ['playlist'],
-						operation: ['add', 'remove', 'get', 'getTracks'],
+						resource: ['album', 'artist', 'playlist', 'track', 'podcast'],
+					},
+					hide: {
+						operation: ['search'],
 					},
 				},
-				placeholder: '12345647',
-				description: "The playlist's Deezer ID",
+				placeholder: '1234567',
+				description: 'Resource ID',
 			},
+			{
+				displayName: 'Search Keyword',
+				name: 'query',
+				type: 'string',
+				required: true,
+				default: '',
+				description: 'The keyword term to search for',
+				displayOptions: {
+					show: {
+						resource: ['album', 'artist', 'playlist', 'track', 'podcast'],
+						operation: ['search'],
+					},
+				},
+			},
+
 			{
 				displayName: 'Name',
 				name: 'name',
@@ -474,36 +515,6 @@ export class Deezer implements INodeType {
 				description: 'Name of the playlist to create',
 			},
 			{
-				displayName: 'Additional Fields',
-				name: 'additionalFields',
-				type: 'collection',
-				placeholder: 'Add Field',
-				default: {},
-				displayOptions: {
-					show: {
-						resource: ['playlist'],
-						operation: ['create'],
-					},
-				},
-				options: [
-					{
-						displayName: 'Description',
-						name: 'description',
-						type: 'string',
-						default: '',
-						placeholder: 'These are all my favorite songs.',
-						description: 'Description for the playlist to create',
-					},
-					{
-						displayName: 'Public',
-						name: 'public',
-						type: 'boolean',
-						default: true,
-						description: 'Whether the playlist is publicly accessible',
-					},
-				],
-			},
-			{
 				displayName: 'Track ID',
 				name: 'trackID',
 				type: 'string',
@@ -515,300 +526,59 @@ export class Deezer implements INodeType {
 						operation: ['add', 'remove'],
 					},
 				},
-				placeholder: '1234567',
-				description: "The track's Deezer ID. The track to add/remove from the playlist.",
+				placeholder: 'Favorite Songs',
+				description: 'Name of the playlist to create',
 			},
 			{
-				displayName: 'Additional Fields',
-				name: 'additionalFields',
-				type: 'collection',
-				placeholder: 'Add Field',
-				default: {},
-				displayOptions: {
-					show: {
-						resource: ['playlist'],
-						operation: ['add'],
-					},
-				},
-				options: [
-					{
-						displayName: 'Position',
-						name: 'position',
-						type: 'number',
-						typeOptions: {
-							minValue: 0,
-						},
-						default: 0,
-						placeholder: '0',
-						description: "The new track's position in the playlist",
-					},
-				],
-			},
-			{
-				displayName: 'Search Keyword',
-				name: 'query',
-				type: 'string',
-				required: true,
-				default: '',
-				description: 'The keyword term to search for',
-				displayOptions: {
-					show: {
-						resource: ['playlist'],
-						operation: ['search'],
-					},
-				},
-			},
-
-			// -----------------------------------------------------
-			//         Track Operations
-			//         Get a Track, Get a Track's Audio Features
-			// -----------------------------------------------------
-			{
-				displayName: 'Operation',
-				name: 'operation',
-				type: 'options',
-				noDataExpression: true,
-				displayOptions: {
-					show: {
-						resource: ['track'],
-					},
-				},
-				options: [
-					{
-						name: 'Get TODO',
-						value: 'get',
-						description: 'Get a track by its ID',
-						action: 'Get a track',
-					},
-					{
-						name: 'Get Audio Features TODO',
-						value: 'getAudioFeatures',
-						description: 'Get audio features for a track by ID',
-						action: 'Get audio features of a track',
-					},
-					{
-						name: 'Search TODO',
-						value: 'search',
-						description: 'Search tracks by keyword',
-						action: 'Search tracks by keyword',
-					},
-				],
-				default: 'track',
-			},
-			{
-				displayName: 'Track ID',
-				name: 'id',
-				type: 'string',
-				default: '',
+				displayName: 'Return All',
+				name: 'returnAll',
+				type: 'boolean',
+				default: false,
 				required: true,
 				displayOptions: {
 					show: {
-						resource: ['track'],
+						resource: ['album', 'artist', 'playlist', 'track', 'chart', 'user', 'podcast'],
 					},
 					hide: {
-						operation: ['search'],
+						operation: ['get'],
 					},
 				},
-				placeholder: '1234567',
-				description: "The track's Deezer ID",
+				description: 'Whether to return all results or only up to a given limit',
 			},
 			{
-				displayName: 'Search Keyword',
-				name: 'query',
-				type: 'string',
+				displayName: 'Offset',
+				name: 'offset',
+				type: 'number',
+				default: 50,
 				required: true,
-				default: '',
-				description: 'The keyword term to search for',
 				displayOptions: {
 					show: {
-						resource: ['track'],
-						operation: ['search'],
+						returnAll: [false],
 					},
 				},
+				typeOptions: {
+					minValue: 1,
+					maxValue: 100,
+				},
+				description: 'The offset of the first object you want to get.',
 			},
-
-			// -----------------------------------------------------
-			//         Library Operations
-			//         Get liked tracks
-			// -----------------------------------------------------
-			// {
-			// 	displayName: 'Operation',
-			// 	name: 'operation',
-			// 	type: 'options',
-			// 	noDataExpression: true,
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['library'],
-			// 		},
-			// 	},
-			// 	options: [
-			// 		{
-			// 			name: 'Get Liked Tracks TODO',
-			// 			value: 'getLikedTracks',
-			// 			description: "Get the user's liked tracks",
-			// 			action: 'Get liked tracks',
-			// 		},
-			// 	],
-			// 	default: 'getLikedTracks',
-			// },
-
-			// ---------------------------------------
-			//         My Data Operations
-			//         Get Followed Artists
-			// ---------------------------------------
-			// {
-			// 	displayName: 'Operation',
-			// 	name: 'operation',
-			// 	type: 'options',
-			// 	noDataExpression: true,
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['myData'],
-			// 		},
-			// 	},
-			// 	options: [
-			// 		{
-			// 			name: 'Get Following Artists TODO',
-			// 			value: 'getFollowingArtists',
-			// 			description: 'Get your followed artists',
-			// 			action: 'Get your followed artists',
-			// 		},
-			// 	],
-			// 	default: 'getFollowingArtists',
-			// },
-			// {
-			// 	displayName: 'Return All',
-			// 	name: 'returnAll',
-			// 	type: 'boolean',
-			// 	default: false,
-			// 	required: true,
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['album', 'artist', 'library', 'myData', 'playlist', 'track', 'player'],
-			// 			operation: [
-			// 				'getTracks',
-			// 				'getAlbums',
-			// 				'getUserPlaylists',
-			// 				'getNewReleases',
-			// 				'getLikedTracks',
-			// 				'getFollowingArtists',
-			// 				'search',
-			// 				'recentlyPlayed',
-			// 			],
-			// 		},
-			// 	},
-			// 	description: 'Whether to return all results or only up to a given limit',
-			// },
-			// {
-			// 	displayName: 'Limit',
-			// 	name: 'limit',
-			// 	type: 'number',
-			// 	default: 50,
-			// 	required: true,
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['album', 'artist', 'library', 'playlist', 'track'],
-			// 			operation: [
-			// 				'getTracks',
-			// 				'getAlbums',
-			// 				'getUserPlaylists',
-			// 				'getNewReleases',
-			// 				'getLikedTracks',
-			// 				'search',
-			// 			],
-			// 			returnAll: [false],
-			// 		},
-			// 	},
-			// 	typeOptions: {
-			// 		minValue: 1,
-			// 		maxValue: 100,
-			// 	},
-			// 	description: 'Max number of results to return',
-			// },
-			// {
-			// 	displayName: 'Limit',
-			// 	name: 'limit',
-			// 	type: 'number',
-			// 	default: 50,
-			// 	required: true,
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['myData', 'player'],
-			// 			operation: ['getFollowingArtists', 'recentlyPlayed'],
-			// 			returnAll: [false],
-			// 		},
-			// 	},
-			// 	typeOptions: {
-			// 		minValue: 1,
-			// 		maxValue: 50,
-			// 	},
-			// 	description: 'Max number of results to return',
-			// },
-			// {
-			// 	displayName: 'Volume',
-			// 	name: 'volumePercent',
-			// 	type: 'number',
-			// 	default: 50,
-			// 	required: true,
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['player'],
-			// 			operation: ['volume'],
-			// 		},
-			// 	},
-			// 	typeOptions: {
-			// 		minValue: 0,
-			// 		maxValue: 100,
-			// 	},
-			// 	description: 'The volume percentage to set',
-			// },
-			// {
-			// 	displayName: 'Filters',
-			// 	name: 'filters',
-			// 	type: 'collection',
-			// 	placeholder: 'Add Filter',
-			// 	default: {},
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['album'],
-			// 			operation: ['getNewReleases'],
-			// 		},
-			// 	},
-			// 	options: [
-			// 		{
-			// 			displayName: 'Country',
-			// 			name: 'country',
-			// 			type: 'options',
-			// 			default: 'US',
-			// 			options: [], //isoCountryCodes.map(({ name, alpha2 }) => ({ name, value: alpha2 })),
-			// 			description: 'Country to filter new releases by',
-			// 		},
-			// 	],
-			// },
-			// {
-			// 	displayName: 'Filters',
-			// 	name: 'filters',
-			// 	type: 'collection',
-			// 	placeholder: 'Add Filter',
-			// 	default: {},
-			// 	displayOptions: {
-			// 		show: {
-			// 			resource: ['playlist', 'artist', 'track', 'album'],
-			// 			operation: ['search'],
-			// 		},
-			// 	},
-			// 	options: [
-			// 		{
-			// 			displayName: 'Country',
-			// 			name: 'market',
-			// 			type: 'options',
-			// 			options: [], //isoCountryCodes.map(({ name, alpha2 }) => ({ name, value: alpha2 })),
-			// 			default: '',
-			// 			description:
-			// 				'If a country code is specified, only content that is playable in that market is returned',
-			// 		},
-			// 	],
-			// },
+			{
+				displayName: 'Limit',
+				name: 'limit',
+				type: 'number',
+				default: 50,
+				required: true,
+				displayOptions: {
+					show: {
+						returnAll: [false],
+					},
+				},
+				typeOptions: {
+					minValue: 1,
+					maxValue: 100,
+				},
+				description: 'The maximum number of objects to return.',
+			},
 		],
 	};
 
