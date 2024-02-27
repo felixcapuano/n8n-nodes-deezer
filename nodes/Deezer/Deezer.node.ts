@@ -8,7 +8,7 @@ import {
 } from 'n8n-workflow';
 import { merge } from 'lodash';
 
-import calls from './crud';
+import crud from './crud';
 import { getAccessToken } from './GenericFunctions';
 
 const API_URL: string = 'https://api.deezer.com';
@@ -583,11 +583,11 @@ export class Deezer implements INodeType {
 
 		for (let i = 0; i < items.length; i++) {
 			try {
-				const operationRequest: IHttpRequestOptions = await calls[resource][operation](this, i);
+				const operationRequest: IHttpRequestOptions = await crud[resource][operation](this, i);
 
 				request = merge(request, operationRequest);
 
-				const responseData = await this.helpers.httpRequest(request);
+				let responseData = await this.helpers.httpRequest(request);
 
 				const executionData = this.helpers.constructExecutionMetaData(
 					this.helpers.returnJsonArray(responseData as IDataObject[]),
