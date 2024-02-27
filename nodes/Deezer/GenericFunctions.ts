@@ -14,7 +14,6 @@ import { NodeApiError } from 'n8n-workflow';
 import get from 'lodash/get';
 
 const API_URL: string = 'https://api.deezer.com';
-// const API_URL: string = 'https://mammoth.free.beeceptor.com';
 
 /**
  * Make an API request to Deezer
