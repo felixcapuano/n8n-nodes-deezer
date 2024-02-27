@@ -1,46 +1,73 @@
-![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
+# Deezer API Node for n8n
 
-# n8n-nodes-starter
-
-This repo contains example nodes to help you get started building your own custom integrations for [n8n](n8n.io). It includes the node linter and other dependencies.
-
-To make your custom node available to the community, you must create it as an npm package, and [submit it to the npm registry](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry).
+This is a custom node for [n8n](https://n8n.io/) that allows you to interact with the Deezer API. With this node, you can perform various actions such as searching for tracks, albums, artists, and playlists, retrieving track details, and more.
 
 ## Prerequisites
 
-You need the following installed on your development machine:
+Before using this node, make sure you have the following:
 
-* [git](https://git-scm.com/downloads)
-* Node.js and npm. Minimum version Node 16. You can find instructions on how to install both using nvm (Node Version Manager) for Linux, Mac, and WSL [here](https://github.com/nvm-sh/nvm). For Windows users, refer to Microsoft's guide to [Install NodeJS on Windows](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows).
-* Install n8n with:
-	```
-	npm install n8n -g
-	```
-* Recommended: follow n8n's guide to [set up your development environment](https://docs.n8n.io/integrations/creating-nodes/build/node-development-environment/).
+- An active Deezer account
+- Access to the Deezer API (you can obtain this by creating an application on the [Deezer for Developers](https://developers.deezer.com/) website)
 
+## Installation
 
-## Using this starter
+1. Install n8n by following the instructions in the [n8n documentation](https://docs.n8n.io/getting-started/installation).
+2. Clone or download this repository.
+3. Navigate to the repository folder and run the following command to install the dependencies:
 
-These are the basic steps for working with the starter. For detailed guidance on creating and publishing nodes, refer to the [documentation](https://docs.n8n.io/integrations/creating-nodes/).
+```bash
+npm install
+```
 
-1. [Generate a new repository](https://github.com/n8n-io/n8n-nodes-starter/generate) from this template repository.
-2. Clone your new repo:
-    ```
-    git clone https://github.com/<your organization>/<your-repo-name>.git
-    ```
-3. Run `npm i` to install dependencies.
-4. Open the project in your editor.
-5. Browse the examples in `/nodes` and `/credentials`. Modify the examples, or replace them with your own nodes.
-6. Update the `package.json` to match your details.
-7. Run `npm run lint` to check for errors or `npm run lintfix` to automatically fix errors when possible.
-8. Test your node locally. Refer to [Run your node locally](https://docs.n8n.io/integrations/creating-nodes/test/run-node-locally/) for guidance.
-9. Replace this README with documentation for your node. Use the [README_TEMPLATE](README_TEMPLATE.md) to get started.
-10. Update the LICENSE file to use your details.
-11. [Publish](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry) your package to npm.
+4. Copy the entire folder `deezer` to your n8n custom nodes folder. The default location for the custom nodes folder is `~/.n8n/custom/`.
 
-## More information
+## Usage
 
-Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/creating-nodes/) for detailed information on building your own nodes.
+1. Open n8n in your browser.
+2. Create a new workflow or open an existing one.
+3. Drag and drop the "Deezer" node from the nodes panel onto the canvas.
+4. Double-click on the node to configure it.
+5. Click on the credentials field and select "Add new Deezer API credentials".
+6. Enter your Deezer API credentials (client ID and client secret) and click "Create".
+7. Select the desired operation from the "Operation" dropdown list.
+8. Configure the remaining fields based on the selected operation.
+9. Click "Execute Node" to run the workflow.
+
+## Credentials
+
+To use the Deezer API node, you need to create Deezer API credentials. Here's how:
+
+1. Open n8n in your browser.
+2. Click on the "Credentials" tab in the top menu.
+3. Click on the "Create New Credentials" button.
+4. Select "Deezer API" from the dropdown list.
+5. Enter a name for the credentials (e.g., "Deezer API").
+6. Enter your Deezer API client ID and client secret.
+7. Click "Create" to save the credentials.
+
+## Node Reference
+
+### Deezer
+
+The Deezer node has the following operations:
+
+- **Search**: Search for tracks, albums, artists, or playlists.
+- **Get Track**: Retrieve details for a specific track.
+- **Get Album**: Retrieve details for a specific album.
+- **Get Artist**: Retrieve details for a specific artist.
+- **Get Playlist**: Retrieve details for a specific playlist.
+- **Get User**: Retrieve details for a specific user.
+- And more...
+
+For detailed information on each operation and their respective input/output parameters, refer to the [Deezer API documentation](https://developers.deezer.com/api).
+
+## Limitations
+
+Please note that this node currently supports a subset of the Deezer API functionality. If you require additional features, feel free to contribute to the project or submit a feature request.
+
+## Support
+
+If you encounter any issues or have any questions, please open an issue in the [GitHub repository](https://github.com/n8n-io/n8n).
 
 ## License
 
