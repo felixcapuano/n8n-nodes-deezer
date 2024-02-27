@@ -74,12 +74,6 @@ export default {
 
 			return { method: 'GET', url: `/playlist/${id}` };
 		},
-		getUserPlaylists: async (
-			excf: IExecuteFunctions,
-			index: number,
-		): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/playlists` };
-		},
 		create: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
 			const id = excf.getNodeParameter('id', index) as string;
 			const name = excf.getNodeParameter('name', index) as string;
@@ -122,6 +116,108 @@ export default {
 			const query = excf.getNodeParameter('query', index) as string;
 
 			return { method: 'GET', url: `/search?q=playlist:"${query}"` };
+		},
+	},
+	track: {
+		get: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			const id = excf.getNodeParameter('id', index) as string;
+
+			return { method: 'GET', url: `/track/${id}` };
+		},
+		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			const query = excf.getNodeParameter('query', index) as string;
+
+			return { method: 'GET', url: `/search?q=track:"${query}"` };
+		},
+	},
+	chart: {
+		get: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: '/chart' };
+		},
+		getArtists: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: '/chart/artists' };
+		},
+		getAlbums: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: '/chart/albums' };
+		},
+		getTracks: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: '/chart/tracks' };
+		},
+		getPlaylists: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: '/chart/playlists' };
+		},
+		getPodcasts: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: '/chart/podcasts' };
+		},
+	},
+	user: {
+		get: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me` };
+		},
+		getPlaylists: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/playlists` };
+		},
+		getFavoriteTracks: async (
+			excf: IExecuteFunctions,
+			index: number,
+		): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/tracks` };
+		},
+		getFavoriteAlbums: async (
+			excf: IExecuteFunctions,
+			index: number,
+		): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/albums` };
+		},
+		getFavoriteArtists: async (
+			excf: IExecuteFunctions,
+			index: number,
+		): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/artists` };
+		},
+		getFavoritePodcasts: async (
+			excf: IExecuteFunctions,
+			index: number,
+		): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/podcasts` };
+		},
+		getFavoriteRadios: async (
+			excf: IExecuteFunctions,
+			index: number,
+		): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/radios` };
+		},
+		getFlow: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/flow` };
+		},
+		getFollowings: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/followings` };
+		},
+		getFollowers: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/followers` };
+		},
+		getRecentTracks: async (
+			excf: IExecuteFunctions,
+			index: number,
+		): Promise<IHttpRequestOptions> => {
+			return { method: 'GET', url: `/user/me/history` };
+		},
+	},
+	podcast: {
+		get: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			const id = excf.getNodeParameter('id', index) as string;
+
+			return { method: 'GET', url: `/podcast/${id}` };
+		},
+		getEpisodes: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			const id = excf.getNodeParameter('id', index) as string;
+
+			return { method: 'GET', url: `/podcast/${id}/episodes` };
+		},
+		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
+			const query = excf.getNodeParameter('query', index) as string;
+
+			return { method: 'GET', url: `/search?q=podcast:"${query}"` };
 		},
 	},
 } as any;
