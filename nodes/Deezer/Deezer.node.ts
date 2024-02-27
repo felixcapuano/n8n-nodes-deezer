@@ -498,7 +498,6 @@ export class Deezer implements INodeType {
 					},
 				},
 			},
-
 			{
 				displayName: 'Name',
 				name: 'name',
@@ -549,7 +548,7 @@ export class Deezer implements INodeType {
 				displayName: 'Offset',
 				name: 'offset',
 				type: 'number',
-				default: 50,
+				default: 0,
 				required: true,
 				displayOptions: {
 					show: {
@@ -557,8 +556,7 @@ export class Deezer implements INodeType {
 					},
 				},
 				typeOptions: {
-					minValue: 1,
-					maxValue: 100,
+					minValue: 0,
 				},
 				description: 'The offset of the first object you want to get.',
 			},
