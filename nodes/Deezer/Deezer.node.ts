@@ -5,16 +5,11 @@ import {
 	type INodeType,
 	type INodeTypeDescription,
 	type IHttpRequestOptions,
-	type ICredentialDataDecryptedObject,
 } from 'n8n-workflow';
-import {
-	type ClientOAuth2Options,
-	type ClientOAuth2TokenData,
-	ClientOAuth2,
-} from '@n8n/client-oauth2';
+import { merge } from 'lodash';
 
 import calls from './crud';
-import { merge } from 'lodash';
+import { getAccessToken } from './GenericFunctions';
 
 const API_URL: string = 'https://api.deezer.com';
 
@@ -28,22 +23,6 @@ const baseRequestOptions: IHttpRequestOptions = {
 	qs: {},
 	json: true,
 	url: '',
-};
-
-const getAccessToken = async function (credentials: ICredentialDataDecryptedObject): Promise<any> {
-	const oAuthClient = new ClientOAuth2({
-		clientId: credentials.clientId,
-		clientSecret: credentials.clientSecret,
-		accessTokenUri: credentials.accessTokenUrl,
-		scopes: (credentials.scope as string).split(' '),
-		ignoreSSLIssues: credentials.ignoreSSLIssues,
-		authentication: credentials.authentication ?? 'header',
-	} as ClientOAuth2Options);
-
-	const oauthTokenData = credentials.oauthTokenData as ClientOAuth2TokenData;
-	const token = oAuthClient.createToken(oauthTokenData);
-
-	return token.accessToken;
 };
 
 export class Deezer implements INodeType {
@@ -84,7 +63,7 @@ export class Deezer implements INodeType {
 					{ name: 'User', value: 'user' },
 					{ name: 'Podcast', value: 'podcast' },
 				],
-				default: 'player',
+				default: 'album',
 			},
 
 			// -----------------------------------------------
@@ -584,23 +563,31 @@ export class Deezer implements INodeType {
 		// Get all of the incoming input data to loop through
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
+		let request: IHttpRequestOptions;
 
 		const operation = this.getNodeParameter('operation', 0);
 		const resource = this.getNodeParameter('resource', 0);
 
-		const credentials = (await this.getCredentials(
-			'deezerOAuth2Api',
-		)) as ICredentialDataDecryptedObject;
+		const credentials = await this.getCredentials('deezerOAuth2Api');
+		const accessToken = await getAccessToken(credentials);
 
-		baseRequestOptions.qs = { access_token: await getAccessToken(credentials) };
+		request = merge(baseRequestOptions, { qs: { access_token: accessToken } });
+
+		const returnAll = this.getNodeParameter('returnAll', 0, true);
+		if (!returnAll) {
+			const offset = this.getNodeParameter('offset', 0);
+			const limit = this.getNodeParameter('limit', 0);
+
+			request = merge(request, { qs: { index: offset, limit: limit } });
+		}
 
 		for (let i = 0; i < items.length; i++) {
 			try {
-				const requestOptions: IHttpRequestOptions = await calls[resource][operation](this, i);
+				const operationRequest: IHttpRequestOptions = await calls[resource][operation](this, i);
 
-				const responseData = await this.helpers.httpRequest(
-					merge(baseRequestOptions, requestOptions) as IHttpRequestOptions,
-				);
+				request = merge(request, operationRequest);
+
+				const responseData = await this.helpers.httpRequest(request);
 
 				const executionData = this.helpers.constructExecutionMetaData(
 					this.helpers.returnJsonArray(responseData as IDataObject[]),

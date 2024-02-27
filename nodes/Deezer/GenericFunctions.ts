@@ -100,3 +100,18 @@ export async function deezerApiRequestAllItems(
 
 	return returnData;
 }
+export async function getAccessToken(credentials: ICredentialDataDecryptedObject): Promise<any> {
+	const oAuthClient = new ClientOAuth2({
+		clientId: credentials.clientId,
+		clientSecret: credentials.clientSecret,
+		accessTokenUri: credentials.accessTokenUrl,
+		scopes: (credentials.scope as string).split(' '),
+		ignoreSSLIssues: credentials.ignoreSSLIssues,
+		authentication: credentials.authentication ?? 'header',
+	} as ClientOAuth2Options);
+
+	const oauthTokenData = credentials.oauthTokenData as ClientOAuth2TokenData;
+	const token = oAuthClient.createToken(oauthTokenData);
+
+	return token.accessToken;
+}
