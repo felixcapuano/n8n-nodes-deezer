@@ -19,8 +19,9 @@ export default {
 		},
 		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
 			const query = excf.getNodeParameter('query', index) as string;
+			const order = excf.getNodeParameter('order', index) as string;
 
-			return { method: 'GET', url: `/search?q=album:"${query}"` };
+			return { method: 'GET', url: `/search?q=album:"${query}"`, qs: { order } };
 		},
 	},
 	artist: {
@@ -64,8 +65,9 @@ export default {
 		},
 		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
 			const query = excf.getNodeParameter('query', index) as string;
+			const order = excf.getNodeParameter('order', index) as string;
 
-			return { method: 'GET', url: `/search?q=artist:"${query}"` };
+			return { method: 'GET', url: `/search?q=artist:"${query}"`, qs: { order } };
 		},
 	},
 	playlist: {
@@ -114,8 +116,9 @@ export default {
 		},
 		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
 			const query = excf.getNodeParameter('query', index) as string;
+			const order = excf.getNodeParameter('order', index) as string;
 
-			return { method: 'GET', url: `/search?q=playlist:"${query}"` };
+			return { method: 'GET', url: `/search?q=playlist:"${query}"`, qs: { order } };
 		},
 	},
 	track: {
@@ -126,8 +129,9 @@ export default {
 		},
 		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
 			const query = excf.getNodeParameter('query', index) as string;
+			const order = excf.getNodeParameter('order', index) as string;
 
-			return { method: 'GET', url: `/search?q=track:"${query}"` };
+			return { method: 'GET', url: `/search?q=track:"${query}"`, qs: { order } };
 		},
 	},
 	chart: {
@@ -216,8 +220,9 @@ export default {
 		},
 		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
 			const query = excf.getNodeParameter('query', index) as string;
+			const order = excf.getNodeParameter('order', index) as string;
 
-			return { method: 'GET', url: `/search?q=podcast:"${query}"` };
+			return { method: 'GET', url: `/search?q=podcast:"${query}"`, qs: { order } };
 		},
 	},
 } as any;
