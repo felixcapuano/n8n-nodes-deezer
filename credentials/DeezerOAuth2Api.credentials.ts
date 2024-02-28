@@ -13,7 +13,7 @@ export class DeezerOAuth2Api implements ICredentialType {
 		{
 			displayName: 'Deezer Server',
 			name: 'server',
-			type: 'string',
+			type: 'hidden',
 			default: 'https://connect.deezer.com',
 		},
 		{
@@ -38,9 +38,27 @@ export class DeezerOAuth2Api implements ICredentialType {
 		},
 		{
 			displayName: 'Scope',
+			description: 'https://developers.deezer.com/api/permissions',
 			name: 'scope',
-			type: 'hidden',
-			default: 'basic_access,email',
+			type: 'multiOptions',
+			options: [
+				{ name: 'Basic Access', value: 'basic_access' },
+				{ name: 'Email', value: 'email' },
+				{ name: 'Offline Access', value: 'offline_access' },
+				{ name: 'Manage Library', value: 'manage_library' },
+				{ name: 'Manage Community', value: 'manage_community' },
+				{ name: 'Delete Library', value: 'delete_library' },
+				{ name: 'Listening History', value: 'listening_history' },
+			],
+			default: [
+				'basic_access',
+				'email',
+				'offline_access',
+				'manage_library',
+				'manage_community',
+				'delete_library',
+				'listening_history',
+			],
 		},
 		{
 			displayName: 'Auth URI Query Parameters',
