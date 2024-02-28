@@ -478,6 +478,32 @@ export class Deezer implements INodeType {
 				},
 			},
 			{
+				displayName: 'Order',
+				name: 'order',
+				type: 'options',
+				required: true,
+				default: 'RANKING',
+				options: [
+					{ name: 'Ranking', value: 'RANKING' },
+					{ name: 'Track Ascendent', value: 'TRACK_ASC' },
+					{ name: 'Track Descendent', value: 'TRACK_DESC' },
+					{ name: 'Artist Ascendent', value: 'ARTIST_ASC' },
+					{ name: 'Artist Descendent', value: 'ARTIST_DESC' },
+					{ name: 'Album Ascendent', value: 'ALBUM_ASC' },
+					{ name: 'Album Descendent', value: 'ALBUM_DESC' },
+					{ name: 'Rating Ascendent', value: 'RATING_ASC' },
+					{ name: 'Rating Descendent', value: 'RATING_DESC' },
+					{ name: 'Duration Ascendent', value: 'DURATION_ASC' },
+					{ name: 'Duration Descendent', value: 'DURATION_DESC' },
+				],
+				displayOptions: {
+					show: {
+						resource: ['album', 'artist', 'playlist', 'track', 'podcast'],
+						operation: ['search'],
+					},
+				},
+			},
+			{
 				displayName: 'Name',
 				name: 'name',
 				type: 'string',
