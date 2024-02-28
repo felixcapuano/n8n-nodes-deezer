@@ -1,4 +1,4 @@
-# Deezer API Node for n8n
+# Deezer Node for n8n
 
 This is a custom node for [n8n](https://n8n.io/) that allows you to interact with the Deezer API. With this node, you can perform various actions such as searching for tracks, albums, artists, and playlists, retrieving track details, and more.
 
