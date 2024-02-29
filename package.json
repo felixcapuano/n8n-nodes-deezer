@@ -1,19 +1,19 @@
 {
 	"name": "n8n-nodes-deezer",
 	"version": "0.1.0",
-	"description": "",
+	"description": "This is a custom node for [n8n](https://n8n.io/) that allows you to interact with the Deezer API. With this node, you can perform various actions such as searching for tracks, albums, artists, and playlists, retrieving track details, and more.",
 	"keywords": [
 		"n8n-community-node-package"
 	],
 	"license": "MIT",
 	"homepage": "",
 	"author": {
-		"name": "",
-		"email": ""
+		"name": "felixc",
+		"email": "essais2615@gmail.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/<...>/n8n-nodes-<...>.git"
+		"url": "https://github.com/felixcapuano/n8n-nodes-deezer.git"
 	},
 	"main": "index.js",
 	"scripts": {

@@ -55,13 +55,34 @@ export class Deezer implements INodeType {
 				type: 'options',
 				noDataExpression: true,
 				options: [
-					{ name: 'Album', value: 'album' },
-					{ name: 'Artist', value: 'artist' },
-					{ name: 'Playlist', value: 'playlist' },
-					{ name: 'Track', value: 'track' },
-					{ name: 'Chart', value: 'chart' },
-					{ name: 'User', value: 'user' },
-					{ name: 'Podcast', value: 'podcast' },
+					{
+						name: 'Album',
+						value: 'album',
+					},
+					{
+						name: 'Artist',
+						value: 'artist',
+					},
+					{
+						name: 'Chart',
+						value: 'chart',
+					},
+					{
+						name: 'Playlist',
+						value: 'playlist',
+					},
+					{
+						name: 'Podcast',
+						value: 'podcast',
+					},
+					{
+						name: 'Track',
+						value: 'track',
+					},
+					{
+						name: 'User',
+						value: 'user',
+					},
 				],
 				default: 'album',
 			},
@@ -90,13 +111,13 @@ export class Deezer implements INodeType {
 						name: 'Get Tracks',
 						value: 'getTracks',
 						description: "Get an album's tracks by ID",
-						action: "Get an album's tracks by ID",
+						action: 'Get an album s tracks by id',
 					},
 					{
 						name: 'Get Fans',
 						value: 'getFans',
-						description: "Get a list of album's fans. Represented by an array of User objects",
-						action: "Get a list of album's fans",
+						description: "Get a list of album's fans. Represented by an array of User objects.",
+						action: 'Get a list of album s fans',
 					},
 					{
 						name: 'Search',
@@ -131,25 +152,7 @@ export class Deezer implements INodeType {
 						name: 'Get Albums',
 						value: 'getAlbums',
 						description: "Get an artist's albums by ID",
-						action: "Get an artist's albums by ID",
-					},
-					{
-						name: 'Get Related Artists',
-						value: 'getRelatedArtists',
-						description: "Get an artist's related artists by ID",
-						action: "Get an artist's related artists by ID",
-					},
-					{
-						name: 'Get Top Tracks',
-						value: 'getTopTracks',
-						description: "Get an artist's top tracks by ID",
-						action: "Get an artist's top tracks by ID",
-					},
-					{
-						name: 'Get Playlist',
-						value: 'getPlaylists',
-						description: 'Get artist playlists by ID',
-						action: 'Get artist playlists by ID',
+						action: 'Get an artist s albums by id',
 					},
 					{
 						name: 'Get Fans',
@@ -158,10 +161,28 @@ export class Deezer implements INodeType {
 						action: 'Get artist fans by ID',
 					},
 					{
+						name: 'Get Playlist',
+						value: 'getPlaylists',
+						description: 'Get artist playlists by ID',
+						action: 'Get artist playlists by ID',
+					},
+					{
 						name: 'Get Radio',
 						value: 'getRadio',
 						description: 'Get artist radio by ID',
 						action: 'Get artist radio by ID',
+					},
+					{
+						name: 'Get Related Artists',
+						value: 'getRelatedArtists',
+						description: "Get an artist's related artists by ID",
+						action: 'Get an artist s related artists by id',
+					},
+					{
+						name: 'Get Top Tracks',
+						value: 'getTopTracks',
+						description: "Get an artist's top tracks by ID",
+						action: 'Get an artist s top tracks by id',
 					},
 					{
 						name: 'Search',
@@ -187,10 +208,10 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get',
-						value: 'get',
-						description: 'Get a playlist by ID',
-						action: 'Get a playlist',
+						name: 'Add an Tracks',
+						value: 'add',
+						description: 'Add tracks to a playlist by track and playlist ID',
+						action: 'Add an item to a playlist',
 					},
 					{
 						name: 'Create a Playlist',
@@ -201,8 +222,13 @@ export class Deezer implements INodeType {
 					{
 						name: 'Delete a Playlist',
 						value: 'delete',
-						description: 'Delete a playlist',
 						action: 'Delete a playlist',
+					},
+					{
+						name: 'Get',
+						value: 'get',
+						description: 'Get a playlist by ID',
+						action: 'Get a playlist',
 					},
 					{
 						name: 'Get Fans',
@@ -211,28 +237,22 @@ export class Deezer implements INodeType {
 						action: 'Get artist fans by ID',
 					},
 					{
+						name: 'Get Radio',
+						value: 'getRadio',
+						description: "Return a list of playlist's recommendation tracks",
+						action: 'Return a list of playlist s recommendation tracks',
+					},
+					{
 						name: 'Get Tracks',
 						value: 'getTracks',
 						description: "Get a playlist's tracks by ID",
-						action: "Get a playlist's tracks by ID",
-					},
-					{
-						name: 'Add an Tracks',
-						value: 'add',
-						description: 'Add tracks to a playlist by track and playlist ID',
-						action: 'Add an Item to a playlist',
+						action: 'Get a playlist s tracks by id',
 					},
 					{
 						name: 'Remove an Track',
 						value: 'remove',
 						description: 'Remove tracks from a playlist by track and playlist ID',
 						action: 'Remove an item from a playlist',
-					},
-					{
-						name: 'Get Radio',
-						value: 'getRadio',
-						description: "Return a list of playlist's recommendation tracks.",
-						action: "Return a list of playlist's recommendation tracks.",
 					},
 					{
 						name: 'Search',
@@ -287,39 +307,33 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
+						name: 'Get Albums',
+						value: 'getAlbums',
+						action: '',
+					},
+					{
 						name: 'Get All',
 						value: 'get',
-						description: '',
 						action: '',
 					},
 					{
 						name: 'Get Artists',
 						value: 'getArtists',
-						description: '',
-						action: '',
-					},
-					{
-						name: 'Get Albums',
-						value: 'getAlbums',
-						description: '',
-						action: '',
-					},
-					{
-						name: 'Get Tracks',
-						value: 'getTracks',
-						description: '',
 						action: '',
 					},
 					{
 						name: 'Get Playlists',
 						value: 'getPlaylists',
-						description: '',
 						action: '',
 					},
 					{
 						name: 'Get Podcasts',
 						value: 'getPodcasts',
-						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Tracks',
+						value: 'getTracks',
 						action: '',
 					},
 				],
@@ -340,69 +354,58 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get User',
-						value: 'get',
-						description: '',
-						action: '',
-					},
-					{
-						name: 'Get Playlists',
-						value: 'getPlaylists',
-						description: '',
-						action: '',
-					},
-					{
-						name: 'Get Favorite Tracks',
-						value: 'getFavoriteTracks',
-						description: '',
-						action: '',
-					},
-					{
 						name: 'Get Favorite Albums',
 						value: 'getFavoriteAlbums',
-						description: '',
 						action: '',
 					},
 					{
 						name: 'Get Favorite Artists',
 						value: 'getFavoriteArtists',
-						description: '',
 						action: '',
 					},
 					{
 						name: 'Get Favorite Podcasts',
 						value: 'getFavoritePodcasts',
-						description: '',
 						action: '',
 					},
 					{
 						name: 'Get Favorite Radios',
 						value: 'getFavoriteRadios',
-						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Favorite Tracks',
+						value: 'getFavoriteTracks',
 						action: '',
 					},
 					{
 						name: 'Get Flow',
 						value: 'getFlow',
-						description: '',
-						action: '',
-					},
-					{
-						name: 'Get Followings',
-						value: 'getFollowings',
-						description: '',
 						action: '',
 					},
 					{
 						name: 'Get Followers',
 						value: 'getFollowers',
-						description: '',
+						action: '',
+					},
+					{
+						name: 'Get Followings',
+						value: 'getFollowings',
+						action: '',
+					},
+					{
+						name: 'Get Playlists',
+						value: 'getPlaylists',
 						action: '',
 					},
 					{
 						name: 'Get Recent Tracks',
 						value: 'getRecentTracks',
-						description: '',
+						action: '',
+					},
+					{
+						name: 'Get User',
+						value: 'get',
 						action: '',
 					},
 				],
@@ -425,19 +428,16 @@ export class Deezer implements INodeType {
 					{
 						name: 'Get',
 						value: 'get',
-						description: '',
 						action: '',
 					},
 					{
 						name: 'Get Episodes',
 						value: 'getEpisodes',
-						description: '',
 						action: '',
 					},
 					{
 						name: 'Search',
 						value: 'search',
-						description: '',
 						action: '',
 					},
 				],
@@ -461,7 +461,6 @@ export class Deezer implements INodeType {
 					},
 				},
 				placeholder: '1234567',
-				description: 'Resource ID',
 			},
 			{
 				displayName: 'Search Keyword',
@@ -484,17 +483,50 @@ export class Deezer implements INodeType {
 				required: true,
 				default: 'RANKING',
 				options: [
-					{ name: 'Ranking', value: 'RANKING' },
-					{ name: 'Track Ascendent', value: 'TRACK_ASC' },
-					{ name: 'Track Descendent', value: 'TRACK_DESC' },
-					{ name: 'Artist Ascendent', value: 'ARTIST_ASC' },
-					{ name: 'Artist Descendent', value: 'ARTIST_DESC' },
-					{ name: 'Album Ascendent', value: 'ALBUM_ASC' },
-					{ name: 'Album Descendent', value: 'ALBUM_DESC' },
-					{ name: 'Rating Ascendent', value: 'RATING_ASC' },
-					{ name: 'Rating Descendent', value: 'RATING_DESC' },
-					{ name: 'Duration Ascendent', value: 'DURATION_ASC' },
-					{ name: 'Duration Descendent', value: 'DURATION_DESC' },
+					{
+						name: 'Album Ascendent',
+						value: 'ALBUM_ASC',
+					},
+					{
+						name: 'Album Descendent',
+						value: 'ALBUM_DESC',
+					},
+					{
+						name: 'Artist Ascendent',
+						value: 'ARTIST_ASC',
+					},
+					{
+						name: 'Artist Descendent',
+						value: 'ARTIST_DESC',
+					},
+					{
+						name: 'Duration Ascendent',
+						value: 'DURATION_ASC',
+					},
+					{
+						name: 'Duration Descendent',
+						value: 'DURATION_DESC',
+					},
+					{
+						name: 'Ranking',
+						value: 'RANKING',
+					},
+					{
+						name: 'Rating Ascendent',
+						value: 'RATING_ASC',
+					},
+					{
+						name: 'Rating Descendent',
+						value: 'RATING_DESC',
+					},
+					{
+						name: 'Track Ascendent',
+						value: 'TRACK_ASC',
+					},
+					{
+						name: 'Track Descendent',
+						value: 'TRACK_DESC',
+					},
 				],
 				displayOptions: {
 					show: {
@@ -563,7 +595,7 @@ export class Deezer implements INodeType {
 				typeOptions: {
 					minValue: 0,
 				},
-				description: 'The offset of the first object you want to get.',
+				description: 'The offset of the first object you want to get',
 			},
 			{
 				displayName: 'Limit',
@@ -578,9 +610,8 @@ export class Deezer implements INodeType {
 				},
 				typeOptions: {
 					minValue: 1,
-					maxValue: 100,
 				},
-				description: 'The maximum number of objects to return.',
+				description: 'Max number of results to return',
 			},
 		],
 	};

@@ -7,7 +7,7 @@ export class DeezerOAuth2Api implements ICredentialType {
 
 	displayName = 'Deezer OAuth2 API';
 
-	documentationUrl = 'deezer';
+	documentationUrl = 'https://developers.deezer.com/api';
 
 	properties: INodeProperties[] = [
 		{
@@ -76,6 +76,7 @@ export class DeezerOAuth2Api implements ICredentialType {
 			displayName: 'Access Token',
 			name: 'accessToken',
 			type: 'hidden',
+			typeOptions: { password: true },
 			default: '={{$self["oauthTokenData"]["access_token"]}}',
 		},
 	];
