@@ -11,10 +11,8 @@ import { merge } from 'lodash';
 import crud from './crud';
 import { getAccessToken } from './GenericFunctions';
 
-const API_URL: string = 'https://api.deezer.com';
-
 const baseRequestOptions: IHttpRequestOptions = {
-	baseURL: API_URL,
+	baseURL: 'https://api.deezer.com',
 	headers: {
 		'User-Agent': 'n8n',
 		'Content-Type': 'text/plain',
@@ -86,7 +84,6 @@ export class Deezer implements INodeType {
 				],
 				default: 'album',
 			},
-
 			// -----------------------------------------------
 			//         Album Operations
 			// -----------------------------------------------
@@ -118,12 +115,6 @@ export class Deezer implements INodeType {
 						value: 'getFans',
 						description: "Get a list of album's fans. Represented by an array of User objects.",
 						action: 'Get a list of album s fans',
-					},
-					{
-						name: 'Search',
-						value: 'search',
-						description: 'Search albums by keyword',
-						action: 'Search albums by keyword',
 					},
 				],
 				default: 'get',
@@ -183,12 +174,6 @@ export class Deezer implements INodeType {
 						value: 'getTopTracks',
 						description: "Get an artist's top tracks by ID",
 						action: 'Get an artist s top tracks by id',
-					},
-					{
-						name: 'Search',
-						value: 'search',
-						description: 'Search artists by keyword',
-						action: 'Search artists by keyword',
 					},
 				],
 				default: 'get',
@@ -254,12 +239,6 @@ export class Deezer implements INodeType {
 						description: 'Remove tracks from a playlist by track and playlist ID',
 						action: 'Remove an item from a playlist',
 					},
-					{
-						name: 'Search',
-						value: 'search',
-						description: 'Search playlists by keyword',
-						action: 'Search playlists by keyword',
-					},
 				],
 				default: 'get',
 			},
@@ -293,6 +272,33 @@ export class Deezer implements INodeType {
 				default: 'get',
 			},
 			// ---------------------------------------
+			//         Podcast Operations
+			// ---------------------------------------
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['podcast'],
+					},
+				},
+				options: [
+					{
+						name: 'Get',
+						value: 'get',
+						action: 'Get a podcast',
+					},
+					{
+						name: 'Get Episodes',
+						value: 'getEpisodes',
+						action: 'Get podcast episodes',
+					},
+				],
+				default: 'get',
+			},
+			// ---------------------------------------
 			//         Chart Operations
 			// ---------------------------------------
 			{
@@ -307,34 +313,34 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get Albums',
-						value: 'getAlbums',
-						action: '',
-					},
-					{
 						name: 'Get All',
 						value: 'get',
-						action: '',
-					},
-					{
-						name: 'Get Artists',
-						value: 'getArtists',
-						action: '',
-					},
-					{
-						name: 'Get Playlists',
-						value: 'getPlaylists',
-						action: '',
-					},
-					{
-						name: 'Get Podcasts',
-						value: 'getPodcasts',
-						action: '',
+						action: 'Get Chart',
 					},
 					{
 						name: 'Get Tracks',
 						value: 'getTracks',
-						action: '',
+						action: 'Get Popular Tracks',
+					},
+					{
+						name: 'Get Albums',
+						value: 'getAlbums',
+						action: 'Get Popular Albums',
+					},
+					{
+						name: 'Get Artists',
+						value: 'getArtists',
+						action: 'Get Popular Artists',
+					},
+					{
+						name: 'Get Playlists',
+						value: 'getPlaylists',
+						action: 'Get Popular Playlists',
+					},
+					{
+						name: 'Get Podcasts',
+						value: 'getPodcasts',
+						action: 'Get Popular Podcasts',
 					},
 				],
 				default: 'get',
@@ -354,91 +360,59 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get Favorite Albums',
-						value: 'getFavoriteAlbums',
-						action: '',
-					},
-					{
-						name: 'Get Favorite Artists',
-						value: 'getFavoriteArtists',
-						action: '',
-					},
-					{
-						name: 'Get Favorite Podcasts',
-						value: 'getFavoritePodcasts',
-						action: '',
-					},
-					{
-						name: 'Get Favorite Radios',
-						value: 'getFavoriteRadios',
-						action: '',
-					},
-					{
-						name: 'Get Favorite Tracks',
-						value: 'getFavoriteTracks',
-						action: '',
-					},
-					{
-						name: 'Get Flow',
-						value: 'getFlow',
-						action: '',
-					},
-					{
-						name: 'Get Followers',
-						value: 'getFollowers',
-						action: '',
-					},
-					{
-						name: 'Get Followings',
-						value: 'getFollowings',
-						action: '',
+						name: 'Get',
+						value: 'get',
+						action: 'Get me',
 					},
 					{
 						name: 'Get Playlists',
 						value: 'getPlaylists',
-						action: '',
+						action: 'Get my playlists',
+					},
+					{
+						name: 'Get Favorite Albums',
+						value: 'getFavoriteAlbums',
+						action: 'Get my favorite albums',
+					},
+					{
+						name: 'Get Favorite Artists',
+						value: 'getFavoriteArtists',
+						action: 'Get my favorite artists',
+					},
+					{
+						name: 'Get Favorite Podcasts',
+						value: 'getFavoritePodcasts',
+						action: 'Get my favorite podcasts',
+					},
+					{
+						name: 'Get Favorite Radios',
+						value: 'getFavoriteRadios',
+						action: 'Get my favorite radios',
+					},
+					{
+						name: 'Get Favorite Tracks',
+						value: 'getFavoriteTracks',
+						action: 'Get my favorite tracks',
+					},
+					{
+						name: 'Get Flow',
+						value: 'getFlow',
+						action: 'Get my flow',
+					},
+					{
+						name: 'Get Followers',
+						value: 'getFollowers',
+						action: 'Get my followers',
+					},
+					{
+						name: 'Get Followings',
+						value: 'getFollowings',
+						action: 'Get my followings',
 					},
 					{
 						name: 'Get Recent Tracks',
 						value: 'getRecentTracks',
-						action: '',
-					},
-					{
-						name: 'Get User',
-						value: 'get',
-						action: '',
-					},
-				],
-				default: 'get',
-			},
-			// ---------------------------------------
-			//         Podcast Operations
-			// ---------------------------------------
-			{
-				displayName: 'Operation',
-				name: 'operation',
-				type: 'options',
-				noDataExpression: true,
-				displayOptions: {
-					show: {
-						resource: ['podcast'],
-					},
-				},
-				options: [
-					{
-						name: 'Get',
-						value: 'get',
-						action: '',
-					},
-					{
-						name: 'Get Episodes',
-						value: 'getEpisodes',
-						action: '',
-					},
-					{
-						name: 'Search',
-						value: 'search',
-						action: '',
+						action: 'Get my recent played tracks',
 					},
 				],
 				default: 'get',

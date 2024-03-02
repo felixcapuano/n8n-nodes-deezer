@@ -17,12 +17,6 @@ export default {
 
 			return { method: 'GET', url: `/album/${id}/fans` };
 		},
-		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
-			const query = excf.getNodeParameter('query', index) as string;
-			const order = excf.getNodeParameter('order', index) as string;
-
-			return { method: 'GET', url: `/search?q=album:"${query}"`, qs: { order } };
-		},
 	},
 	artist: {
 		get: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
@@ -62,12 +56,6 @@ export default {
 			const id = excf.getNodeParameter('id', index) as string;
 
 			return { method: 'GET', url: `/artist/${id}/playlists` };
-		},
-		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
-			const query = excf.getNodeParameter('query', index) as string;
-			const order = excf.getNodeParameter('order', index) as string;
-
-			return { method: 'GET', url: `/search?q=artist:"${query}"`, qs: { order } };
 		},
 	},
 	playlist: {
@@ -114,12 +102,6 @@ export default {
 
 			return { method: 'GET', url: `/playlist/${id}/radio` };
 		},
-		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
-			const query = excf.getNodeParameter('query', index) as string;
-			const order = excf.getNodeParameter('order', index) as string;
-
-			return { method: 'GET', url: `/search?q=playlist:"${query}"`, qs: { order } };
-		},
 	},
 	track: {
 		get: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
@@ -131,7 +113,7 @@ export default {
 			const query = excf.getNodeParameter('query', index) as string;
 			const order = excf.getNodeParameter('order', index) as string;
 
-			return { method: 'GET', url: `/search?q=track:"${query}"`, qs: { order } };
+			return { method: 'GET', url: `/search?q="${query}"`, qs: { order } };
 		},
 	},
 	chart: {
@@ -217,12 +199,6 @@ export default {
 			const id = excf.getNodeParameter('id', index) as string;
 
 			return { method: 'GET', url: `/podcast/${id}/episodes` };
-		},
-		search: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
-			const query = excf.getNodeParameter('query', index) as string;
-			const order = excf.getNodeParameter('order', index) as string;
-
-			return { method: 'GET', url: `/search?q=podcast:"${query}"`, qs: { order } };
 		},
 	},
 } as any;
