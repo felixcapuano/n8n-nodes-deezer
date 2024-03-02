@@ -313,34 +313,34 @@ export class Deezer implements INodeType {
 				},
 				options: [
 					{
-						name: 'Get All',
-						value: 'get',
-						action: 'Get Chart',
-					},
-					{
-						name: 'Get Tracks',
-						value: 'getTracks',
-						action: 'Get Popular Tracks',
-					},
-					{
 						name: 'Get Albums',
 						value: 'getAlbums',
-						action: 'Get Popular Albums',
+						action: 'Get popular albums',
+					},
+					{
+						name: 'Get All',
+						value: 'get',
+						action: 'Get chart',
 					},
 					{
 						name: 'Get Artists',
 						value: 'getArtists',
-						action: 'Get Popular Artists',
+						action: 'Get popular artists',
 					},
 					{
 						name: 'Get Playlists',
 						value: 'getPlaylists',
-						action: 'Get Popular Playlists',
+						action: 'Get popular playlists',
 					},
 					{
 						name: 'Get Podcasts',
 						value: 'getPodcasts',
-						action: 'Get Popular Podcasts',
+						action: 'Get popular podcasts',
+					},
+					{
+						name: 'Get Tracks',
+						value: 'getTracks',
+						action: 'Get popular tracks',
 					},
 				],
 				default: 'get',
@@ -363,11 +363,6 @@ export class Deezer implements INodeType {
 						name: 'Get',
 						value: 'get',
 						action: 'Get me',
-					},
-					{
-						name: 'Get Playlists',
-						value: 'getPlaylists',
-						action: 'Get my playlists',
 					},
 					{
 						name: 'Get Favorite Albums',
@@ -408,6 +403,11 @@ export class Deezer implements INodeType {
 						name: 'Get Followings',
 						value: 'getFollowings',
 						action: 'Get my followings',
+					},
+					{
+						name: 'Get Playlists',
+						value: 'getPlaylists',
+						action: 'Get my playlists',
 					},
 					{
 						name: 'Get Recent Tracks',
