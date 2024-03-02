@@ -9,19 +9,11 @@ import {
 import { merge } from 'lodash';
 
 import crud from './crud';
-import { getAccessToken } from './GenericFunctions';
+import { getAccessToken, requestDeezer } from './GenericFunctions';
 
-const baseRequestOptions: IHttpRequestOptions = {
-	baseURL: 'https://api.deezer.com',
-	headers: {
-		'User-Agent': 'n8n',
-		'Content-Type': 'text/plain',
-		Accept: ' application/json',
-	},
-	qs: {},
-	json: true,
-	url: '',
-};
+const BASE_URL = 'https://api.deezer.com';
+const DEFAULT_OFFSET = 0;
+const DEFAULT_LIMIT = 50;
 
 export class Deezer implements INodeType {
 	description: INodeTypeDescription = {
@@ -602,15 +594,25 @@ export class Deezer implements INodeType {
 		const credentials = await this.getCredentials('deezerOAuth2Api');
 		const accessToken = await getAccessToken(credentials);
 
+		const baseRequestOptions: IHttpRequestOptions = {
+			baseURL: BASE_URL,
+			headers: {
+				'User-Agent': 'n8n',
+				'Content-Type': 'text/plain',
+				Accept: ' application/json',
+			},
+			qs: {},
+			json: true,
+			url: '',
+		};
+
 		request = merge(baseRequestOptions, { qs: { access_token: accessToken } });
 
-		const returnAll = this.getNodeParameter('returnAll', 0, true);
-		if (!returnAll) {
-			const offset = this.getNodeParameter('offset', 0);
-			const limit = this.getNodeParameter('limit', 0);
+		const returnAll = this.getNodeParameter('returnAll', 0, false);
+		const offset = this.getNodeParameter('offset', 0, DEFAULT_OFFSET);
+		const limit = this.getNodeParameter('limit', 0, DEFAULT_LIMIT);
 
-			request = merge(request, { qs: { index: offset, limit: limit } });
-		}
+		request = merge(request, { qs: { index: offset, limit: limit } });
 
 		for (let i = 0; i < items.length; i++) {
 			try {
@@ -618,7 +620,7 @@ export class Deezer implements INodeType {
 
 				request = merge(request, operationRequest);
 
-				let responseData = await this.helpers.httpRequest(request);
+				let responseData = await requestDeezer(this, request, returnAll);
 
 				const executionData = this.helpers.constructExecutionMetaData(
 					this.helpers.returnJsonArray(responseData as IDataObject[]),

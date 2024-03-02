@@ -1,107 +1,15 @@
 import type { ClientOAuth2Options, ClientOAuth2TokenData } from '@n8n/client-oauth2';
 import { ClientOAuth2 } from '@n8n/client-oauth2';
 import type {
-	IDataObject,
 	IExecuteFunctions,
-	IHookFunctions,
-	JsonObject,
 	IHttpRequestOptions,
-	IHttpRequestMethods,
 	ICredentialDataDecryptedObject,
 } from 'n8n-workflow';
-import { NodeApiError } from 'n8n-workflow';
 
-import get from 'lodash/get';
+import merge from 'lodash/merge';
 
-const API_URL: string = 'https://api.deezer.com';
-
-/**
- * Make an API request to Deezer
- *
- */
-export async function deezerApiRequest(
-	this: IHookFunctions | IExecuteFunctions,
-	method: IHttpRequestMethods,
-	endpoint: string,
-	body: object,
-	query?: IDataObject,
-	uri?: string,
-): Promise<any> {
-	const requestOptions: IHttpRequestOptions = {
-		method,
-		headers: {
-			'User-Agent': 'n8n',
-			'Content-Type': 'text/plain',
-			Accept: ' application/json',
-		},
-		qs: query,
-		url: uri || API_URL + endpoint,
-		json: true,
-	};
-
-	if (Object.keys(body).length > 0) {
-		requestOptions.body = body;
-	}
-	try {
-		const credentials = (await this.getCredentials(
-			'deezerOAuth2Api',
-		)) as ICredentialDataDecryptedObject;
-
-		const oAuthClient = new ClientOAuth2({
-			clientId: credentials.clientId,
-			clientSecret: credentials.clientSecret,
-			accessTokenUri: credentials.accessTokenUrl,
-			scopes: (credentials.scope as string).split(' '),
-			ignoreSSLIssues: credentials.ignoreSSLIssues,
-			authentication: credentials.authentication ?? 'header',
-		} as ClientOAuth2Options);
-
-		const oauthTokenData = credentials.oauthTokenData as ClientOAuth2TokenData;
-		const token = oAuthClient.createToken(oauthTokenData);
-
-		requestOptions.qs = { ...requestOptions.qs, access_token: token.accessToken };
-
-		return await this.helpers.httpRequest(requestOptions);
-	} catch (error) {
-		throw new NodeApiError(this.getNode(), error as JsonObject);
-	}
-}
-
-export async function deezerApiRequestAllItems(
-	this: IHookFunctions | IExecuteFunctions,
-	propertyName: string,
-	method: IHttpRequestMethods,
-	endpoint: string,
-	body: object,
-	query?: IDataObject,
-): Promise<any> {
-	const returnData: IDataObject[] = [];
-
-	let responseData;
-
-	let uri: string | undefined;
-
-	do {
-		responseData = await deezerApiRequest.call(this, method, endpoint, body, query, uri);
-
-		returnData.push.apply(returnData, get(responseData, propertyName));
-		uri = responseData.next || responseData[propertyName.split('.')[0]].next;
-		//remove the query as the query parameters are already included in the next, else api throws error.
-		query = {};
-		if (uri?.includes('offset=1000') && endpoint === '/search') {
-			// The search endpoint has a limit of 1000 so step before it returns a 404
-			return returnData;
-		}
-	} while (
-		(responseData.next !== null && responseData.next !== undefined) ||
-		(responseData[propertyName.split('.')[0]].next !== null &&
-			responseData[propertyName.split('.')[0]].next !== undefined)
-	);
-
-	return returnData;
-}
-
-export async function getAccessToken(credentials: ICredentialDataDecryptedObject): Promise<any> {
+export async function getAccessToken(credentials: ICredentialDataDecryptedObject): Promise<string> {
+	// Create a new OAuth client with the provided credentials
 	const oAuthClient = new ClientOAuth2({
 		clientId: credentials.clientId,
 		clientSecret: credentials.clientSecret,
@@ -111,8 +19,59 @@ export async function getAccessToken(credentials: ICredentialDataDecryptedObject
 		authentication: credentials.authentication ?? 'header',
 	} as ClientOAuth2Options);
 
+	// Extract OAuth token data from credentials
 	const oauthTokenData = credentials.oauthTokenData as ClientOAuth2TokenData;
+
+	// Create a token using the OAuth client and provided token data
 	const token = oAuthClient.createToken(oauthTokenData);
 
+	// Return the access token from the token object
 	return token.accessToken;
+}
+
+export async function requestDeezer(
+	excf: IExecuteFunctions,
+	request: IHttpRequestOptions,
+	all: boolean = true,
+): Promise<any> {
+	// Make the initial request
+	const response = await excf.helpers.httpRequest(request);
+
+	// If 'all' is true, fetch additional data
+	if (all) {
+		let nextURL = new URL(response.next);
+
+		// Continue fetching until no more 'next' URLs or data exceeds 1000 items
+		while (true) {
+			// Create a new request based on the 'next' URL
+			const nextRequest = merge(request, {
+				url: nextURL.pathname,
+				qs: Object.fromEntries(nextURL.searchParams),
+			});
+
+			// Make the next request
+			const nextResponse = await excf.helpers.httpRequest(nextRequest);
+
+			// Append the data from the next response to the original response
+			response.data.push(...nextResponse.data);
+
+			// Check if there are more pages of data
+			if (!nextResponse.next) {
+				delete response.next; // No more pages, remove 'next' property
+				break;
+			}
+
+			// Check if the total data exceeds 1000 items
+			if (response.data.length > 1000) {
+				response.next = nextResponse.next; // Store 'next' URL for potential future requests
+				break;
+			}
+
+			// Update the 'next' URL for the next iteration
+			nextURL = new URL(nextResponse.next);
+		}
+	}
+
+	// Return the combined response
+	return response;
 }

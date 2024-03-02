@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-deezer",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "This is a custom node for [n8n](https://n8n.io/) that allows you to interact with the Deezer API. With this node, you can perform various actions such as searching for tracks, albums, artists, and playlists, retrieving track details, and more.",
 	"keywords": [
 		"n8n-community-node-package"
