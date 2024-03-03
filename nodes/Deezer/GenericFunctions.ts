@@ -4,6 +4,7 @@ import type {
 	IExecuteFunctions,
 	IHttpRequestOptions,
 	ICredentialDataDecryptedObject,
+	IDataObject,
 } from 'n8n-workflow';
 
 import merge from 'lodash/merge';
@@ -74,4 +75,14 @@ export async function requestDeezer(
 
 	// Return the combined response
 	return response;
+}
+
+export function buildDeezerSearchQuery(keyword: String, filters: IDataObject): String {
+	let query = keyword.toString();
+
+	for (let [key, value] of Object.entries(filters)) {
+		query += ` ${key}:"${value}"`;
+	}
+
+	return query;
 }
