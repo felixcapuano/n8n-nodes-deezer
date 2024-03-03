@@ -8,7 +8,7 @@ import {
 } from 'n8n-workflow';
 import { merge } from 'lodash';
 
-import crud from './crud';
+import crud from './DeezerRequestBuilder';
 import { getAccessToken, requestDeezer } from './GenericFunctions';
 
 const BASE_URL = 'https://api.deezer.com';
@@ -108,6 +108,12 @@ export class Deezer implements INodeType {
 						description: "Get a list of album's fans. Represented by an array of User objects.",
 						action: 'Get a list of album s fans',
 					},
+					{
+						name: 'Search',
+						value: 'search',
+						description: 'Search tracks by keyword',
+						action: 'Search tracks by keyword',
+					},
 				],
 				default: 'get',
 			},
@@ -166,6 +172,12 @@ export class Deezer implements INodeType {
 						value: 'getTopTracks',
 						description: "Get an artist's top tracks by ID",
 						action: 'Get an artist s top tracks by id',
+					},
+					{
+						name: 'Search',
+						value: 'search',
+						description: 'Search tracks by keyword',
+						action: 'Search tracks by keyword',
 					},
 				],
 				default: 'get',
@@ -231,6 +243,12 @@ export class Deezer implements INodeType {
 						description: 'Remove tracks from a playlist by track and playlist ID',
 						action: 'Remove an item from a playlist',
 					},
+					{
+						name: 'Search',
+						value: 'search',
+						description: 'Search tracks by keyword',
+						action: 'Search tracks by keyword',
+					},
 				],
 				default: 'get',
 			},
@@ -286,6 +304,12 @@ export class Deezer implements INodeType {
 						name: 'Get Episodes',
 						value: 'getEpisodes',
 						action: 'Get podcast episodes',
+					},
+					{
+						name: 'Search',
+						value: 'search',
+						description: 'Search tracks by keyword',
+						action: 'Search tracks by keyword',
 					},
 				],
 				default: 'get',
@@ -429,15 +453,16 @@ export class Deezer implements INodeType {
 				placeholder: '1234567',
 			},
 			{
-				displayName: 'Search Keyword',
-				name: 'query',
-				type: 'string',
+				displayName: 'Search',
+				placeholder: 'Keyword',
 				required: true,
+				name: 'keyword',
+				type: 'string',
 				default: '',
 				description: 'The keyword term to search for',
 				displayOptions: {
 					show: {
-						resource: ['album', 'artist', 'playlist', 'track', 'podcast'],
+						resource: ['track', 'album', 'playlist', 'podcast', 'artist'],
 						operation: ['search'],
 					},
 				},
@@ -530,6 +555,94 @@ export class Deezer implements INodeType {
 				},
 				placeholder: 'Favorite Songs',
 				description: 'Name of the playlist to create',
+			},
+			{
+				displayName: 'Filters',
+				name: 'filters',
+				type: 'collection',
+				placeholder: 'Add Filters',
+				default: {},
+				displayOptions: {
+					show: {
+						resource: ['track', 'album', 'playlist', 'podcast', 'artist'],
+						operation: ['search'],
+					},
+				},
+				options: [
+					{
+						displayName: 'With Artist',
+						name: 'artist',
+						type: 'string',
+						typeOptions: {
+							multipleValues: false,
+						},
+						default: '',
+					},
+					{
+						displayName: 'With Album',
+						name: 'album',
+						type: 'string',
+						required: true,
+						typeOptions: {
+							multipleValues: false,
+						},
+						default: '',
+					},
+					{
+						displayName: 'With Track',
+						name: 'track',
+						type: 'string',
+						typeOptions: {
+							multipleValues: false,
+						},
+						default: '',
+					},
+					{
+						displayName: 'With Label',
+						name: 'label',
+						type: 'string',
+						typeOptions: {
+							multipleValues: false,
+						},
+						default: '',
+					},
+					{
+						displayName: 'With Duration Minimum',
+						name: 'dur_min',
+						type: 'number',
+						typeOptions: {
+							multipleValues: false,
+						},
+						default: 0,
+					},
+					{
+						displayName: 'With Duration Maximum',
+						name: 'dur_max',
+						type: 'number',
+						typeOptions: {
+							multipleValues: false,
+						},
+						default: 999,
+					},
+					{
+						displayName: 'With Tempo(BPM) Minimum',
+						name: 'bpm_min',
+						type: 'number',
+						typeOptions: {
+							multipleValues: false,
+						},
+						default: 0,
+					},
+					{
+						displayName: 'With Tempo(BPM) Maximum',
+						name: 'bpm_max',
+						type: 'number',
+						typeOptions: {
+							multipleValues: false,
+						},
+						default: 999,
+					},
+				],
 			},
 			{
 				displayName: 'Return All',
