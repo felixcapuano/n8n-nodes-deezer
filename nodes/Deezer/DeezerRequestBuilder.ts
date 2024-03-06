@@ -169,55 +169,88 @@ export default {
 	},
 	user: {
 		get: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}` };
 		},
 		getPlaylists: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/playlists` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/playlists` };
 		},
 		getFavoriteTracks: async (
 			excf: IExecuteFunctions,
 			index: number,
 		): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/tracks` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/tracks` };
 		},
 		getFavoriteAlbums: async (
 			excf: IExecuteFunctions,
 			index: number,
 		): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/albums` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/albums` };
 		},
 		getFavoriteArtists: async (
 			excf: IExecuteFunctions,
 			index: number,
 		): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/artists` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/artists` };
 		},
 		getFavoritePodcasts: async (
 			excf: IExecuteFunctions,
 			index: number,
 		): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/podcasts` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/podcasts` };
 		},
 		getFavoriteRadios: async (
 			excf: IExecuteFunctions,
 			index: number,
 		): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/radios` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/radios` };
 		},
 		getFlow: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/flow` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/flow` };
 		},
 		getFollowings: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/followings` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/followings` };
 		},
 		getFollowers: async (excf: IExecuteFunctions, index: number): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/followers` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/followers` };
 		},
 		getRecentTracks: async (
 			excf: IExecuteFunctions,
 			index: number,
 		): Promise<IHttpRequestOptions> => {
-			return { method: 'GET', url: `/user/me/history` };
+			const returnMyUser = excf.getNodeParameter('returnMyUser', index) as string;
+			const id = returnMyUser ? 'me' : excf.getNodeParameter('id', index);
+
+			return { method: 'GET', url: `/user/${id}/history` };
 		},
 	},
 	podcast: {

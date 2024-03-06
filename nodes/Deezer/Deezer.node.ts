@@ -378,57 +378,57 @@ export class Deezer implements INodeType {
 					{
 						name: 'Get',
 						value: 'get',
-						action: 'Get me',
+						action: 'Get user',
 					},
 					{
 						name: 'Get Favorite Albums',
 						value: 'getFavoriteAlbums',
-						action: 'Get my favorite albums',
+						action: 'Get a user s favorite albums from a user',
 					},
 					{
 						name: 'Get Favorite Artists',
 						value: 'getFavoriteArtists',
-						action: 'Get my favorite artists',
+						action: 'Get a user s favorite artists',
 					},
 					{
 						name: 'Get Favorite Podcasts',
 						value: 'getFavoritePodcasts',
-						action: 'Get my favorite podcasts',
+						action: 'Get a user s favorite podcasts',
 					},
 					{
 						name: 'Get Favorite Radios',
 						value: 'getFavoriteRadios',
-						action: 'Get my favorite radios',
+						action: 'Get a user s favorite radios',
 					},
 					{
 						name: 'Get Favorite Tracks',
 						value: 'getFavoriteTracks',
-						action: 'Get my favorite tracks',
+						action: 'Get a user s favorite tracks',
 					},
 					{
 						name: 'Get Flow',
 						value: 'getFlow',
-						action: 'Get my flow',
+						action: 'Get a user s flow',
 					},
 					{
 						name: 'Get Followers',
 						value: 'getFollowers',
-						action: 'Get my followers',
+						action: 'Get a user s followers',
 					},
 					{
 						name: 'Get Followings',
 						value: 'getFollowings',
-						action: 'Get my followings',
+						action: 'Get a user s followings',
 					},
 					{
 						name: 'Get Playlists',
 						value: 'getPlaylists',
-						action: 'Get my playlists',
+						action: 'Get a user s playlists',
 					},
 					{
 						name: 'Get Recent Tracks',
 						value: 'getRecentTracks',
-						action: 'Get my recent played tracks',
+						action: 'Get tracks recently listened to by a user',
 					},
 				],
 				default: 'get',
@@ -437,6 +437,19 @@ export class Deezer implements INodeType {
 			//         Commons
 			// -----------------------------------------------------
 			{
+				displayName: 'Return My User',
+				name: 'returnMyUser',
+				type: 'boolean',
+				default: true,
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['user'],
+					},
+				},
+				description: 'Whether to return the logged in user or a specific user',
+			},
+			{
 				displayName: 'Resource ID',
 				name: 'id',
 				type: 'string',
@@ -444,10 +457,11 @@ export class Deezer implements INodeType {
 				required: true,
 				displayOptions: {
 					show: {
-						resource: ['album', 'artist', 'playlist', 'track', 'podcast'],
+						resource: ['album', 'artist', 'playlist', 'track', 'podcast', 'user'],
 					},
 					hide: {
 						operation: ['search'],
+						returnMyUser: [true],
 					},
 				},
 				placeholder: '1234567',
