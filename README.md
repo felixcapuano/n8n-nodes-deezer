@@ -10,7 +10,10 @@ Before using this node, make sure you have the following:
 - Access to the Deezer API (you can obtain this by creating an application on the [Deezer for Developers](https://developers.deezer.com/) website)
 
 ## Installation
+### User
+https://docs.n8n.io/integrations/community-nodes/installation/gui-install/
 
+### Developer
 1. Install n8n by following the instructions in the [n8n documentation](https://docs.n8n.io/getting-started/installation).
 2. Clone or download this repository.
 3. Navigate to the repository folder and run the following command to install the dependencies:
