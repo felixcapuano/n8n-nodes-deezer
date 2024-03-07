@@ -457,11 +457,27 @@ export class Deezer implements INodeType {
 				required: true,
 				displayOptions: {
 					show: {
-						resource: ['album', 'artist', 'playlist', 'track', 'podcast', 'user'],
+						resource: ['album', 'artist', 'playlist', 'track', 'podcast'],
 					},
 					hide: {
 						operation: ['search'],
-						returnMyUser: [true],
+					},
+				},
+				placeholder: '1234567',
+			},
+			{
+				displayName: 'User ID',
+				name: 'userId',
+				type: 'string',
+				default: '',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['user'],
+						returnMyUser: [false],
+					},
+					hide: {
+						operation: ['search'],
 					},
 				},
 				placeholder: '1234567',
