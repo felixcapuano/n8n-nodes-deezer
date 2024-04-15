@@ -42,14 +42,12 @@
 		"@types/request-promise-native": "~1.0.15",
 		"@typescript-eslint/parser": "~5.45",
 		"eslint-plugin-n8n-nodes-base": "^1.11.0",
-		"gulp": "^4.0.2",
+		"gulp": "^5.0.0",
 		"n8n-core": "*",
 		"prettier": "^2.7.1",
 		"typescript": "~4.8.4"
 	},
 	"dependencies": {
-		"@n8n/client-oauth2": "^0.7.0",
-		"lodash": "^4.17.21",
-		"n8n-workflow": "^1.14.1"
+		"lodash": "^4.17.21"
 	}
 }
